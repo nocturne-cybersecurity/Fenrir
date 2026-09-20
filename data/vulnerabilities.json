@@ -1,0 +1,14 @@
+[
+  {
+    "id": "CVE-2099-0001",
+    "title": "Example server test vulnerability",
+    "affected_products": ["ExampleServer", "Apache", "nginx"],
+    "affected_versions": ["1.2", "2.4", "1.18"],
+    "severity": "high",
+    "cvss": 8.1,
+    "references": ["https://example.com/advisory"],
+    "detection": {
+      "source": "service.product_version"
+    }
+  }
+]

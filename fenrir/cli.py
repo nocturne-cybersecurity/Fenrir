@@ -13,12 +13,14 @@ from rich.panel import Panel
 from rich.prompt import Prompt
 from rich.table import Table
 
+from fenrir.core.capabilities import ExecutionPolicy
 from fenrir.core.engine import Engine
 from fenrir.core.registry import discover_modules
 from fenrir.core.scope import Scope, ScopeError
 from fenrir.core.state import Node, NodeType, StateGraph
 from fenrir.core.storage import Storage
 from fenrir.reporting.generator import write_json, write_markdown
+from fenrir.sessions.manager import SessionManager
 
 # Importar banner desde src
 sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
@@ -40,6 +42,10 @@ def run(
     scope_check: bool = typer.Option(
         False, "--scope-check", help="Verifica que el target esté en el scope (config/scope.yaml)"
     ),
+    exploit: bool = typer.Option(False, "--exploit", help="Habilita discovery y planificación de exploits"),
+    execute: bool = typer.Option(False, "--execute", help="Ejecuta exploits reales (peligroso)"),
+    post: bool = typer.Option(False, "--post", help="Habilita módulos post-explotación"),
+    privesc: bool = typer.Option(False, "--privesc", help="Habilita descubrimiento de privesc"),
 ) -> None:
     """Ejecuta el pipeline completo contra un target."""
     # Mostrar banner
@@ -62,23 +68,39 @@ def run(
     storage = Storage()
     run_id = storage.start_run(target)
 
-    # 4. Módulos
+    # 4. Session Manager (para explotación)
+    session_manager = SessionManager() if (exploit or execute) else None
+
+    # 5. Módulos
     modules = discover_modules()
     console.print(f"[dim]Módulos cargados: {[m.name for m in modules]}[/dim]")
 
-    # 5. Engine
-    engine = Engine(state, modules, dry_run=dry_run)
+    # 6. Engine
+    policy = ExecutionPolicy.from_flags(exploit=exploit, execute=execute, post=post, privesc=privesc)
+    engine = Engine(
+        state,
+        modules,
+        dry_run=dry_run,
+        session_manager=session_manager,
+        policy=policy,
+    )
     engine.run()
 
-    # 6. Persistencia
+    # 7. Persistencia
     storage.finish_run(run_id, state)
 
-    # 7. Reportes
+    # 8. Reportes
     output.mkdir(parents=True, exist_ok=True)
     json_path = write_json(state, output / f"{target}.json")
-    md_path = write_markdown(state, output / f"{target}.md", target)
+    md_path = write_markdown(state, output / f"{target}.md", target, session_manager=session_manager)
     console.print(f"\n[green]✓ Reporte JSON:[/green] {json_path}")
     console.print(f"[green]✓ Reporte Markdown:[/green] {md_path}")
+    
+    # 9. Mostrar sesiones si hubo explotación
+    if session_manager and len(session_manager) > 0:
+        console.print(f"\n[green]✓ Sesiones activas: {len(session_manager)}[/green]")
+        for session in session_manager.list_active():
+            console.print(f"  • {session.id} ({session.target}:{session.port})")
 
 
 @app.command()

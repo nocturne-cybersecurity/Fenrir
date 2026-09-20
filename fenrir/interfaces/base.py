@@ -5,6 +5,7 @@ from abc import ABC, abstractmethod
 from dataclasses import dataclass, field
 from typing import Any, ClassVar
 
+from fenrir.core.capabilities import Capability
 from fenrir.core.state import NodeType, StateGraph
 
 
@@ -32,6 +33,7 @@ class BaseModule(ABC):
     requires: ClassVar[list[NodeType]] = []
     produces: ClassVar[list[NodeType]] = []
     priority: ClassVar[int] = 50
+    capability: ClassVar[Capability] = Capability.READ_ONLY
 
     @abstractmethod
     def can_run(self, state: StateGraph) -> bool:

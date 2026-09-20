@@ -1,11 +1,12 @@
 # Reporte de auditoría — caveswineshop.com
 
-Generado: 2026-09-20T20:46:58.803074Z
+Generado: 2026-09-20T21:08:15.792002Z
 
 ## Resumen
 
 - Hosts descubiertos: **2**
 - Servicios identificados: **4**
+- Findings: **0**
 - Vulnerabilidades: **0**
 
 ## Hosts

@@ -2,7 +2,7 @@
 from __future__ import annotations
 
 import json
-from datetime import datetime
+from datetime import datetime, timezone
 from pathlib import Path
 
 from fenrir.core.state import NodeType, StateGraph
@@ -14,21 +14,55 @@ def write_json(state: StateGraph, path: str | Path) -> Path:
     return path
 
 
-def write_markdown(state: StateGraph, path: str | Path, target: str) -> Path:
+def write_markdown(state: StateGraph, path: str | Path, target: str, session_manager = None) -> Path:
     path = Path(path)
     lines = [
         f"# Reporte de auditoría — {target}",
-        f"\nGenerado: {datetime.utcnow().isoformat()}Z\n",
+        f"\nGenerado: {datetime.now(timezone.utc).isoformat()}Z\n",
         "## Resumen\n",
     ]
 
     hosts = state.find(NodeType.HOST)
     services = state.find(NodeType.SERVICE)
+    findings = state.find(NodeType.FINDING)
     vulns = state.find(NodeType.VULN)
+    exploits = state.find(NodeType.EXPLOIT)
+    exploit_results = state.find(NodeType.EXPLOIT_RESULT)
+    sessions = state.find(NodeType.SESSION)
 
     lines.append(f"- Hosts descubiertos: **{len(hosts)}**")
     lines.append(f"- Servicios identificados: **{len(services)}**")
+    lines.append(f"- Findings: **{len(findings)}**")
     lines.append(f"- Vulnerabilidades: **{len(vulns)}**\n")
+    lines.append(f"- Exploits registrados: **{len(exploits)}**")
+    lines.append(f"- Resultados de explotación: **{len(exploit_results)}**")
+    lines.append(f"- Sesiones activas: **{len(sessions)}**\n")
+
+    if findings:
+        lines.append("## Findings\n")
+        lines.append("| Estado | Severidad | Confianza | Título |")
+        lines.append("|---|---|---|---|")
+        for finding in findings:
+            title = str(finding.data.get("title", "—")).replace("|", "\\|")
+            lines.append(
+                f"| {finding.data.get('status', '—')} | "
+                f"{finding.data.get('severity', '—')} | "
+                f"{finding.data.get('confidence', '—')} | {title} |"
+            )
+        lines.append("")
+
+    if exploit_results:
+        lines.append("## Planes de explotación\n")
+        lines.append("| Exploit | Estado | Target | Error |")
+        lines.append("|---|---|---|---|")
+        for result in exploit_results:
+            lines.append(
+                f"| {result.data.get('exploit_id', '—')} | "
+                f"{result.data.get('status', '—')} | "
+                f"{result.data.get('target', '—')} | "
+                f"{result.data.get('error', '—')} |"
+            )
+        lines.append("")
 
     if hosts:
         lines.append("## Hosts\n")
@@ -92,6 +126,20 @@ def write_markdown(state: StateGraph, path: str | Path, target: str) -> Path:
             else:
                 lines.append("- Candidatos: **ninguno observado**")
             lines.append("- El origen real no se considera confirmado.\n")
+
+    if sessions:
+        lines.append("## Sesiones Activas\n")
+        lines.append("| ID | Target | Puerto | Tipo | Usuario | Plataforma |")
+        lines.append("|---|---|---|---|---|---|")
+        for session in sessions:
+            session_id = session.data.get("id", "—")[:8]
+            target = session.data.get("target", "—")
+            port = session.data.get("port", "—")
+            session_type = session.data.get("session_type", "—")
+            user = session.data.get("user", "—")
+            platform = session.data.get("platform", "—")
+            lines.append(f"| {session_id} | {target} | {port} | {session_type} | {user} | {platform} |")
+        lines.append("")
 
     path.write_text("\n".join(lines))
     return path

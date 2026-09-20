@@ -3,6 +3,7 @@ from __future__ import annotations
 
 from rich.console import Console
 
+from fenrir.core.capabilities import Capability, ExecutionPolicy
 from fenrir.core.state import StateGraph
 from fenrir.interfaces.base import BaseModule
 
@@ -16,15 +17,23 @@ class Engine:
         modules: list[BaseModule],
         max_iterations: int = 200,
         dry_run: bool = False,
+        session_manager = None,
+        policy: ExecutionPolicy | None = None,
     ) -> None:
         self.state = state
         self.modules = list(modules)
         self.max_iterations = max_iterations
         self.dry_run = dry_run
+        self.session_manager = session_manager
+        self.policy = policy or ExecutionPolicy()
         self.executed: list[str] = []
 
     def step(self) -> bool:
-        candidates = [m for m in self.modules if m.can_run(self.state)]
+        candidates = [
+            m for m in self.modules
+            if self.policy.allows(getattr(m, "capability", Capability.READ_ONLY))
+            and m.can_run(self.state)
+        ]
         if not candidates:
             return False
 
@@ -40,6 +49,14 @@ class Engine:
         if self.dry_run:
             console.print("  [yellow]dry-run: no se ejecuta[/yellow]")
             return True
+
+        # Pass session_manager to exploit executor modules
+        if self.session_manager and hasattr(chosen, 'session_manager'):
+            chosen.session_manager = self.session_manager
+        
+        # Pass policy to modules that support it
+        if self.policy and hasattr(chosen, 'policy'):
+            chosen.policy = self.policy
 
         try:
             result = chosen.run(self.state)

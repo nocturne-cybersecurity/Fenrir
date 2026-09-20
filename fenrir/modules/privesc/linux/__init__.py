@@ -1,0 +1,1 @@
+"""Descubrimientos Linux de privilegios."""

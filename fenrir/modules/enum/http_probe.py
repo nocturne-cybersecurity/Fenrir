@@ -78,4 +78,5 @@ class HTTPProbe(BaseModule):
             "server": r.headers.get("Server"),
             "title": title,
             "content_type": r.headers.get("Content-Type"),
+            "headers": dict(r.headers),
         }

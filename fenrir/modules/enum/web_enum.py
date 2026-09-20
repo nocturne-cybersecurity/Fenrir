@@ -120,6 +120,7 @@ class WebEnum(BaseModule):
             "meta": parser.meta,
             "links": parser.links[:50],
             "forms": parser.forms[:20],
+            "headers": dict(response.headers),
         }
         if payload["title"] is None and response.text:
             payload["title"] = response.text[:200].strip() or None

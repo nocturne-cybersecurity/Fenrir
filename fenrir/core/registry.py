@@ -3,6 +3,7 @@ todas las subclases de BaseModule."""
 from __future__ import annotations
 
 import importlib
+import inspect
 import pkgutil
 from pathlib import Path
 
@@ -24,7 +25,7 @@ def discover_modules(package: str = "fenrir.modules") -> list[BaseModule]:
                 isinstance(attr, type)
                 and issubclass(attr, BaseModule)
                 and attr is not BaseModule
-                and not getattr(attr, "__abstract__", False)
+                and not inspect.isabstract(attr)
                 and attr not in discovered_types
             ):
                 discovered_types.add(attr)

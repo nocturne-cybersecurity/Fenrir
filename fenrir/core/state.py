@@ -4,6 +4,7 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from enum import Enum
 from typing import Any
+from uuid import uuid4
 
 import networkx as nx
 
@@ -13,9 +14,71 @@ class NodeType(str, Enum):
     HOST = "host"
     PORT = "port"
     SERVICE = "service"
+    FINDING = "finding"
     VULN = "vuln"
+    VALIDATION = "validation"
+    EXPLOIT = "exploit"
+    EXPLOIT_RESULT = "exploit_result"
     CREDENTIAL = "credential"
     SESSION = "session"
+
+
+class FindingStatus(str, Enum):
+    POTENTIAL = "potential"
+    CONFIRMED = "confirmed"
+    REJECTED = "rejected"
+
+
+@dataclass
+class Finding:
+    """Hallazgo producido por un detector y actualizado por un validator."""
+
+    target: str
+    service: str | None
+    title: str
+    severity: str
+    confidence: float
+    evidence: list[Any] = field(default_factory=list)
+    status: FindingStatus | str = FindingStatus.POTENTIAL
+    references: list[str] = field(default_factory=list)
+    id: str = field(default_factory=lambda: str(uuid4()))
+
+    def __post_init__(self) -> None:
+        if not self.target:
+            raise ValueError("finding target must not be empty")
+        if not self.title:
+            raise ValueError("finding title must not be empty")
+        if not 0 <= self.confidence <= 1:
+            raise ValueError("finding confidence must be between 0 and 1")
+        self.status = FindingStatus(self.status)
+
+    def transition_to(self, status: FindingStatus | str) -> None:
+        """Aplica una transición explícita del ciclo de vida del hallazgo."""
+        next_status = FindingStatus(status)
+        allowed = {
+            FindingStatus.POTENTIAL: {
+                FindingStatus.CONFIRMED,
+                FindingStatus.REJECTED,
+            },
+            FindingStatus.CONFIRMED: {FindingStatus.REJECTED},
+            FindingStatus.REJECTED: set(),
+        }
+        if next_status not in allowed[self.status]:
+            raise ValueError(f"invalid finding transition: {self.status} -> {next_status}")
+        self.status = next_status
+
+    def to_dict(self) -> dict[str, Any]:
+        return {
+            "id": self.id,
+            "target": self.target,
+            "service": self.service,
+            "title": self.title,
+            "severity": self.severity,
+            "confidence": self.confidence,
+            "evidence": self.evidence,
+            "status": self.status.value,
+            "references": self.references,
+        }
 
 
 @dataclass
@@ -45,6 +108,38 @@ class StateGraph:
         self.g.add_node(node.id, type=node.type.value)
         self._index[node.id] = node
         return node
+
+    def add_finding(self, finding: Finding) -> Finding:
+        """Registra un finding sin modificar el servicio que lo originó."""
+        self.add_node(Node(NodeType.FINDING, finding.id, finding.to_dict()))
+        return finding
+
+    def add_knowledge_node(self, node_type: NodeType, item: Any, item_id: str) -> Node:
+        """Añade una vulnerabilidad o exploit al estado operacional."""
+        if node_type not in {NodeType.VULN, NodeType.EXPLOIT}:
+            raise ValueError("knowledge nodes must be vulnerabilities or exploits")
+        data = item.to_dict()
+        return self.add_node(Node(node_type, item_id, data))
+
+    def add_exploit_result(self, result: Any) -> Node:
+        return self.add_node(Node(NodeType.EXPLOIT_RESULT, result.id, result.to_dict()))
+
+    def findings(self, **filters: Any) -> list[Finding]:
+        return [
+            Finding(**{key: value for key, value in node.data.items() if key != "id"}, id=node.id)
+            for node in self.find(NodeType.FINDING, **filters)
+        ]
+
+    def update_finding_status(
+        self, finding_id: str, status: FindingStatus | str
+    ) -> Finding:
+        node = self.get(finding_id)
+        if node is None or node.type != NodeType.FINDING:
+            raise KeyError(f"finding not found: {finding_id}")
+        finding = Finding(**node.data)
+        finding.transition_to(status)
+        node.data.update(finding.to_dict())
+        return finding
 
     def add_edge(self, src: str, dst: str, relation: str) -> None:
         if src in self._index and dst in self._index:
