@@ -76,7 +76,6 @@ def run(
 
 @app.command()
 def runs() -> None:
-    """Lista ejecuciones previas."""
     storage = Storage()
     for run_id, target, started in storage.list_runs():
         console.print(f"#{run_id}  {target}  {started}")
