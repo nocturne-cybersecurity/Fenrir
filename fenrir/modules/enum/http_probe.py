@@ -37,7 +37,7 @@ class HTTPProbe(BaseModule):
             if not host:
                 continue
             port = svc.data["port"]
-            scheme = "https" if svc.data["name"] == "https" else "http"
+            scheme = "https" if self._is_tls_service(svc) else "http"
             url = f"{scheme}://{host}:{port}/"
             info = self._probe(url)
             if info:
@@ -45,6 +45,14 @@ class HTTPProbe(BaseModule):
                 svc.data["url"] = url
                 probed += 1
         return ModuleResult(True, probed, f"{probed} servicios HTTP probados")
+
+    @staticmethod
+    def _is_tls_service(svc) -> bool:
+        try:
+            port = int(svc.data.get("port", 0))
+        except (TypeError, ValueError):
+            port = 0
+        return (svc.data.get("name") or "").lower() == "https" or port in {443, 8443, 9443}
 
     def _host_of(self, svc: Node, state: StateGraph) -> str | None:
         port_num = svc.data.get("port")

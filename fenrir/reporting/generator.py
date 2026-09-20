@@ -59,6 +59,40 @@ def write_markdown(state: StateGraph, path: str | Path, target: str) -> Path:
             )
         lines.append("")
 
+    proxy_targets = [
+        target for target in state.find(NodeType.TARGET)
+        if target.data.get("proxy_detected")
+    ]
+    if proxy_targets:
+        lines.append("## Proxy/CDN y posible origen\n")
+        for proxy_target in proxy_targets:
+            detection = proxy_target.data.get("proxy_detection", {})
+            provider = detection.get("provider", "desconocido")
+            status = proxy_target.data.get("proxy_origin_recon_status", "sin datos")
+            lines.append(f"- Proxy/CDN detectado: **{provider}** "
+                         f"(confianza {detection.get('confidence', '—')})")
+            lines.append(f"- Estado de búsqueda pasiva: **{status}**")
+            note = proxy_target.data.get("proxy_origin_recon_note")
+            if note:
+                lines.append(f"- Nota: {note}")
+            candidates = proxy_target.data.get("origin_candidates") or []
+            if candidates:
+                lines.append("\n| Candidato posible | Hostname | Confianza | Evidencia |")
+                lines.append("|---|---|---|---|")
+                for candidate in candidates:
+                    evidence = ", ".join(
+                        str(item.get("hostname") or item.get("source", ""))
+                        for item in candidate.get("evidence", [])
+                    )
+                    lines.append(
+                        f"| {candidate.get('candidate', '—')} | "
+                        f"{candidate.get('hostname', '—')} | "
+                        f"{candidate.get('confidence', '—')} | {evidence or '—'} |"
+                    )
+            else:
+                lines.append("- Candidatos: **ninguno observado**")
+            lines.append("- El origen real no se considera confirmado.\n")
+
     path.write_text("\n".join(lines))
     return path
 

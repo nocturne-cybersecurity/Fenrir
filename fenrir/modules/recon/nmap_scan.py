@@ -4,6 +4,10 @@ from __future__ import annotations
 import shutil
 import subprocess
 import xml.etree.ElementTree as ET
+from pathlib import Path
+
+import yaml
+from yaml import YAMLError
 
 from fenrir.core.state import Node, NodeType, StateGraph
 from fenrir.interfaces.base import BaseModule, ModuleResult
@@ -15,6 +19,24 @@ class NmapScan(BaseModule):
     requires = [NodeType.TARGET]
     produces = [NodeType.HOST, NodeType.PORT, NodeType.SERVICE]
     priority = 100
+
+    def __init__(self):
+        super().__init__()
+        self.config = self._load_config()
+
+    def _load_config(self) -> dict:
+        config_path = Path(__file__).parent.parent.parent / "config" / "nmap.yaml"
+        default_config = {
+            "default_options": ["-sV", "-T4", "-Pn", "-oX", "-"],
+            "timeout": 600
+        }
+        if config_path.exists():
+            try:
+                with open(config_path) as f:
+                    return yaml.safe_load(f) or default_config
+            except (OSError, YAMLError):
+                return default_config
+        return default_config
 
     def can_run(self, state: StateGraph) -> bool:
         # Solo si hay targets y aún no hemos enumerado hosts
@@ -35,11 +57,19 @@ class NmapScan(BaseModule):
 
     def _scan(self, target: str) -> str:
         try:
+            options = self.config.get("default_options", ["-sV", "-T4", "-Pn", "-oX", "-"])
+            timeout = self.config.get("timeout", 600)
+            cmd = ["nmap"] + options
+            ports = self.config.get("ports")
+            if ports and "-p" not in options:
+                cmd.extend(["-p", str(ports)])
+            cmd.append(target)
             proc = subprocess.run(
-                ["nmap", "-sV", "-T4", "-oX", "-", target],
+                cmd,
                 capture_output=True,
                 text=True,
-                timeout=600,
+                check=False,
+                timeout=timeout,
             )
             return proc.stdout
         except subprocess.TimeoutExpired:

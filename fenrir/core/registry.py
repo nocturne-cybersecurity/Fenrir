@@ -11,6 +11,7 @@ from fenrir.interfaces.base import BaseModule
 
 def discover_modules(package: str = "fenrir.modules") -> list[BaseModule]:
     modules: list[BaseModule] = []
+    discovered_types: set[type[BaseModule]] = set()
     pkg = importlib.import_module(package)
     pkg_path = Path(pkg.__file__).parent
 
@@ -24,6 +25,8 @@ def discover_modules(package: str = "fenrir.modules") -> list[BaseModule]:
                 and issubclass(attr, BaseModule)
                 and attr is not BaseModule
                 and not getattr(attr, "__abstract__", False)
+                and attr not in discovered_types
             ):
+                discovered_types.add(attr)
                 modules.append(attr())
     return modules
