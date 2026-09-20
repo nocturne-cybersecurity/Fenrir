@@ -1,0 +1,7 @@
+# Whitelist de targets permitidos. AÑADE AQUÍ tus labs.
+# Sin esta lista, el framework rechazará ejecutar.
+allowed:
+  - 127.0.0.1
+  - 10.10.10.0/24       # ejemplo rango HTB
+  - scanme.nmap.org     # target público de prueba de Nmap
+  - "*.lab.local"
