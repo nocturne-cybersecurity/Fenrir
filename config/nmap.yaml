@@ -1,0 +1,7 @@
+default_options:
+- -sV
+- -T4
+- -Pn
+- -oX
+- '-'
+timeout: 600
