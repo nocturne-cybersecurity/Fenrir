@@ -1,0 +1,2107 @@
+{
+  "nodes": [
+    {
+      "id": "192.168.100.154",
+      "type": "target",
+      "data": {
+        "ip": "192.168.100.154",
+        "hostname": "192.168.100.154",
+        "known_hosts": [
+          "192.168.100.154"
+        ],
+        "proxy_origin_recon_attempted": true
+      }
+    },
+    {
+      "id": "192.168.100.154:21/tcp",
+      "type": "port",
+      "data": {
+        "number": 21,
+        "protocol": "tcp",
+        "host": "192.168.100.154"
+      }
+    },
+    {
+      "id": "192.168.100.154:21/tcp:ftp",
+      "type": "service",
+      "data": {
+        "name": "ftp",
+        "port": 21,
+        "product": "vsftpd",
+        "version": "2.3.4",
+        "ftp_banner": "220 (vsFTPd 2.3.4)",
+        "ftp_code": 220,
+        "ftp_server": "(vsFTPd 2.3.4)"
+      }
+    },
+    {
+      "id": "192.168.100.154:22/tcp",
+      "type": "port",
+      "data": {
+        "number": 22,
+        "protocol": "tcp",
+        "host": "192.168.100.154"
+      }
+    },
+    {
+      "id": "192.168.100.154:22/tcp:ssh",
+      "type": "service",
+      "data": {
+        "name": "ssh",
+        "port": 22,
+        "product": "OpenSSH",
+        "version": "10.0p2 Debian 7+deb13u4",
+        "banner": "SSH-2.0-OpenSSH_10.0p2 Debian-7+deb13u4"
+      }
+    },
+    {
+      "id": "192.168.100.154:80/tcp",
+      "type": "port",
+      "data": {
+        "number": 80,
+        "protocol": "tcp",
+        "host": "192.168.100.154"
+      }
+    },
+    {
+      "id": "192.168.100.154:80/tcp:http",
+      "type": "service",
+      "data": {
+        "name": "http",
+        "port": 80,
+        "product": "Apache httpd",
+        "version": "2.4.25",
+        "proxy_origin_recon_attempted": true,
+        "status_code": 200,
+        "server": "Apache/2.4.25 (Debian)",
+        "title": "Login :: Damn Vulnerable Web Application (DVWA) v1.10 *Development*",
+        "content_type": "text/html;charset=utf-8",
+        "headers": {
+          "Date": "Mon, 21 Sep 2026 01:47:09 GMT",
+          "Server": "Apache/2.4.25 (Debian)",
+          "Expires": "Tue, 23 Jun 2009 12:00:00 GMT",
+          "Cache-Control": "no-cache, must-revalidate",
+          "Pragma": "no-cache",
+          "Vary": "Accept-Encoding",
+          "Content-Encoding": "gzip",
+          "Content-Length": "700",
+          "Keep-Alive": "timeout=5, max=99",
+          "Connection": "Keep-Alive",
+          "Content-Type": "text/html;charset=utf-8"
+        },
+        "url": "http://192.168.100.154:80/",
+        "meta": {
+          "content-type": "text/html; charset=UTF-8"
+        },
+        "links": [
+          "dvwa/css/login.css",
+          "http://www.dvwa.co.uk/"
+        ],
+        "forms": [
+          {
+            "action": "login.php",
+            "method": "POST",
+            "enctype": ""
+          }
+        ]
+      }
+    },
+    {
+      "id": "192.168.100.154:445/tcp",
+      "type": "port",
+      "data": {
+        "number": 445,
+        "protocol": "tcp",
+        "host": "192.168.100.154"
+      }
+    },
+    {
+      "id": "192.168.100.154:445/tcp:netbios-ssn",
+      "type": "service",
+      "data": {
+        "name": "netbios-ssn",
+        "port": 445,
+        "product": "Samba smbd",
+        "version": "3.0.20-Debian"
+      }
+    },
+    {
+      "id": "192.168.100.154:2222/tcp",
+      "type": "port",
+      "data": {
+        "number": 2222,
+        "protocol": "tcp",
+        "host": "192.168.100.154"
+      }
+    },
+    {
+      "id": "192.168.100.154:2222/tcp:ssh",
+      "type": "service",
+      "data": {
+        "name": "ssh",
+        "port": 2222,
+        "product": "OpenSSH",
+        "version": "4.7p1 Debian 8ubuntu1",
+        "banner": "SSH-2.0-OpenSSH_4.7p1 Debian-8ubuntu1"
+      }
+    },
+    {
+      "id": "192.168.100.154:3000/tcp",
+      "type": "port",
+      "data": {
+        "number": 3000,
+        "protocol": "tcp",
+        "host": "192.168.100.154"
+      }
+    },
+    {
+      "id": "192.168.100.154:3000/tcp:ppp",
+      "type": "service",
+      "data": {
+        "name": "ppp",
+        "port": 3000,
+        "product": null,
+        "version": null
+      }
+    },
+    {
+      "id": "192.168.100.154:8080/tcp",
+      "type": "port",
+      "data": {
+        "number": 8080,
+        "protocol": "tcp",
+        "host": "192.168.100.154"
+      }
+    },
+    {
+      "id": "192.168.100.154:8080/tcp:http",
+      "type": "service",
+      "data": {
+        "name": "http",
+        "port": 8080,
+        "product": "Apache httpd",
+        "version": "2.2.8",
+        "proxy_origin_recon_attempted": true,
+        "status_code": 200,
+        "server": "Apache/2.2.8 (Ubuntu) DAV/2",
+        "title": "Metasploitable2 - Linux",
+        "content_type": "text/html",
+        "headers": {
+          "Date": "Mon, 21 Sep 2026 01:47:10 GMT",
+          "Server": "Apache/2.2.8 (Ubuntu) DAV/2",
+          "X-Powered-By": "PHP/5.2.4-2ubuntu5.10",
+          "Keep-Alive": "timeout=15, max=100",
+          "Connection": "Keep-Alive",
+          "Transfer-Encoding": "chunked",
+          "Content-Type": "text/html"
+        },
+        "url": "http://192.168.100.154:8080/",
+        "meta": {},
+        "links": [
+          "/twiki/",
+          "/phpMyAdmin/",
+          "/mutillidae/",
+          "/dvwa/",
+          "/dav/"
+        ],
+        "forms": []
+      }
+    },
+    {
+      "id": "f624728c-8fbb-46c7-ba95-a1fa7c122dfc",
+      "type": "finding",
+      "data": {
+        "id": "f624728c-8fbb-46c7-ba95-a1fa7c122dfc",
+        "target": "192.168.100.154",
+        "service": "192.168.100.154:80/tcp:http",
+        "title": "Missing HTTP security headers",
+        "severity": "low",
+        "confidence": 0.82,
+        "evidence": [
+          {
+            "service": "192.168.100.154:80/tcp:http",
+            "missing_headers": [
+              "content-security-policy",
+              "x-content-type-options"
+            ]
+          }
+        ],
+        "status": "confirmed",
+        "references": [
+          "OWASP: security headers"
+        ]
+      }
+    },
+    {
+      "id": "2da3923b-ae4a-4ac1-9fd6-9549b239d72e",
+      "type": "finding",
+      "data": {
+        "id": "2da3923b-ae4a-4ac1-9fd6-9549b239d72e",
+        "target": "192.168.100.154",
+        "service": "192.168.100.154:8080/tcp:http",
+        "title": "Missing HTTP security headers",
+        "severity": "low",
+        "confidence": 0.82,
+        "evidence": [
+          {
+            "service": "192.168.100.154:8080/tcp:http",
+            "missing_headers": [
+              "content-security-policy",
+              "x-content-type-options"
+            ]
+          }
+        ],
+        "status": "confirmed",
+        "references": [
+          "OWASP: security headers"
+        ]
+      }
+    },
+    {
+      "id": "535f4c6f-849a-4be5-ba05-17edb2c1fb3a",
+      "type": "finding",
+      "data": {
+        "id": "535f4c6f-849a-4be5-ba05-17edb2c1fb3a",
+        "target": "192.168.100.154",
+        "service": "192.168.100.154:21/tcp:ftp",
+        "title": "Network service exposes protocol metadata",
+        "severity": "info",
+        "confidence": 0.76,
+        "evidence": [
+          {
+            "service": "ftp",
+            "port": 21,
+            "metadata": {
+              "ftp_banner": "220 (vsFTPd 2.3.4)"
+            }
+          }
+        ],
+        "status": "confirmed",
+        "references": [
+          "CWE-200"
+        ]
+      }
+    },
+    {
+      "id": "d254e9ea-2ee8-43d6-8afd-2ed0c5410056",
+      "type": "finding",
+      "data": {
+        "id": "d254e9ea-2ee8-43d6-8afd-2ed0c5410056",
+        "target": "192.168.100.154",
+        "service": "192.168.100.154:22/tcp:ssh",
+        "title": "Network service exposes protocol metadata",
+        "severity": "info",
+        "confidence": 0.76,
+        "evidence": [
+          {
+            "service": "ssh",
+            "port": 22,
+            "metadata": {
+              "banner": "SSH-2.0-OpenSSH_10.0p2 Debian-7+deb13u4"
+            }
+          }
+        ],
+        "status": "confirmed",
+        "references": [
+          "CWE-200"
+        ]
+      }
+    },
+    {
+      "id": "72bc0813-692f-4ca0-be2e-a23daa3c0f0e",
+      "type": "finding",
+      "data": {
+        "id": "72bc0813-692f-4ca0-be2e-a23daa3c0f0e",
+        "target": "192.168.100.154",
+        "service": "192.168.100.154:2222/tcp:ssh",
+        "title": "Network service exposes protocol metadata",
+        "severity": "info",
+        "confidence": 0.76,
+        "evidence": [
+          {
+            "service": "ssh",
+            "port": 2222,
+            "metadata": {
+              "banner": "SSH-2.0-OpenSSH_4.7p1 Debian-8ubuntu1"
+            }
+          }
+        ],
+        "status": "confirmed",
+        "references": [
+          "CWE-200"
+        ]
+      }
+    },
+    {
+      "id": "exploit.metasploit.vsftpd_234_backdoor",
+      "type": "exploit",
+      "data": {
+        "id": "exploit.metasploit.vsftpd_234_backdoor",
+        "name": "vsftpd 2.3.4 Backdoor Command Execution (CVE-2011-2523)",
+        "title": "vsftpd 2.3.4 Backdoor Command Execution (CVE-2011-2523)",
+        "source": "metasploit",
+        "source_url": "https://www.rapid7.com/db/modules/exploit/unix/ftp/vsftpd_234_backdoor",
+        "cve_url": "https://nvd.nist.gov/vuln/detail/CVE-2011-2523",
+        "cve_name": "vsftpd 2.3.4 backdoor",
+        "description": "vsftpd 2.3.4 Backdoor Command Execution (CVE-2011-2523)",
+        "vulnerability_ids": [
+          "CVE-2011-2523"
+        ],
+        "platforms": [
+          "linux"
+        ],
+        "architectures": [
+          "x86",
+          "x86_64"
+        ],
+        "required_services": [
+          "ftp"
+        ],
+        "required_versions": [
+          "product",
+          "version"
+        ],
+        "module": "exploit/unix/ftp/vsftpd_234_backdoor",
+        "reliability": "high",
+        "status": "candidate",
+        "requirements": {},
+        "options": {},
+        "resource": "/ftp",
+        "url_resource": "/ftp",
+        "exploit_id": "exploit.metasploit.vsftpd_234_backdoor",
+        "finding_id": "192.168.100.154:21/tcp:ftp",
+        "vulnerability_id": "CVE-2011-2523",
+        "product_match": true,
+        "version_match": true,
+        "service_match": true,
+        "confidence": 0.7,
+        "candidate_status": "compatible"
+      }
+    },
+    {
+      "id": "exploit.local.ftp_brute",
+      "type": "exploit",
+      "data": {
+        "id": "exploit.local.ftp_brute",
+        "name": "FTP Brute Force (Hydra)",
+        "title": "FTP Brute Force (Hydra)",
+        "source": "local",
+        "source_url": null,
+        "cve_url": null,
+        "cve_name": null,
+        "description": "FTP Brute Force (Hydra)",
+        "vulnerability_ids": [],
+        "platforms": [
+          "linux",
+          "windows"
+        ],
+        "architectures": [
+          "x86",
+          "x86_64"
+        ],
+        "required_services": [
+          "ftp"
+        ],
+        "required_versions": [],
+        "module": "fenrir.modules.exploit.hydra_ftp.HydraFTPExploit",
+        "reliability": "medium",
+        "status": "candidate",
+        "requirements": {},
+        "options": {},
+        "resource": "/ftp",
+        "url_resource": "/ftp",
+        "exploit_id": "exploit.local.ftp_brute",
+        "finding_id": "192.168.100.154:21/tcp:ftp",
+        "vulnerability_id": null,
+        "product_match": true,
+        "version_match": true,
+        "service_match": true,
+        "confidence": 0.7,
+        "candidate_status": "compatible"
+      }
+    },
+    {
+      "id": "exploit.local.ssh_brute",
+      "type": "exploit",
+      "data": {
+        "id": "exploit.local.ssh_brute",
+        "name": "SSH Brute Force (Hydra)",
+        "title": "SSH Brute Force (Hydra)",
+        "source": "local",
+        "source_url": null,
+        "cve_url": null,
+        "cve_name": null,
+        "description": "SSH Brute Force (Hydra)",
+        "vulnerability_ids": [],
+        "platforms": [
+          "linux",
+          "windows"
+        ],
+        "architectures": [
+          "x86",
+          "x86_64"
+        ],
+        "required_services": [
+          "ssh"
+        ],
+        "required_versions": [],
+        "module": "fenrir.modules.exploit.hydra_ssh.HydraSSHExploit",
+        "reliability": "medium",
+        "status": "candidate",
+        "requirements": {},
+        "options": {},
+        "resource": "/ssh",
+        "url_resource": "/ssh",
+        "exploit_id": "exploit.local.ssh_brute",
+        "finding_id": "192.168.100.154:22/tcp:ssh",
+        "vulnerability_id": null,
+        "product_match": true,
+        "version_match": true,
+        "service_match": true,
+        "confidence": 0.7,
+        "candidate_status": "compatible"
+      }
+    },
+    {
+      "id": "exploit.local.wordlist_orchestrator",
+      "type": "exploit",
+      "data": {
+        "id": "exploit.local.wordlist_orchestrator",
+        "name": "Wordlist Orchestrator (John/Hashcat)",
+        "title": "Wordlist Orchestrator (John/Hashcat)",
+        "source": "local",
+        "source_url": null,
+        "cve_url": null,
+        "cve_name": null,
+        "description": "Wordlist Orchestrator (John/Hashcat)",
+        "vulnerability_ids": [],
+        "platforms": [
+          "linux",
+          "windows"
+        ],
+        "architectures": [
+          "x86",
+          "x86_64"
+        ],
+        "required_services": [
+          "ssh"
+        ],
+        "required_versions": [],
+        "module": "fenrir.modules.exploit.wordlist_orchestrator.WordlistOrchestrator",
+        "reliability": "medium",
+        "status": "candidate",
+        "requirements": {},
+        "options": {},
+        "resource": "/ssh",
+        "url_resource": "/ssh",
+        "exploit_id": "exploit.local.wordlist_orchestrator",
+        "finding_id": "192.168.100.154:22/tcp:ssh",
+        "vulnerability_id": null,
+        "product_match": true,
+        "version_match": true,
+        "service_match": true,
+        "confidence": 0.7,
+        "candidate_status": "compatible"
+      }
+    },
+    {
+      "id": "exploit.local.owasp_a03_injection",
+      "type": "exploit",
+      "data": {
+        "id": "exploit.local.owasp_a03_injection",
+        "name": "OWASP Top 10 A03 \u2013 Injection / SQLi / Command injection pattern",
+        "title": "OWASP Top 10 A03 \u2013 Injection / SQLi / Command injection pattern",
+        "source": "local",
+        "source_url": "https://nvd.nist.gov/vuln/detail/CVE-2017-5638",
+        "cve_url": "https://nvd.nist.gov/vuln/detail/CVE-2017-5638",
+        "cve_name": "CVE-2017-5638",
+        "description": "OWASP Top 10 A03 \u2013 Injection / SQLi / Command injection pattern",
+        "vulnerability_ids": [
+          "CVE-2017-5638",
+          "CVE-2018-7600",
+          "CVE-2022-22965"
+        ],
+        "platforms": [
+          "linux",
+          "windows"
+        ],
+        "architectures": [
+          "x86",
+          "x86_64",
+          "arm64"
+        ],
+        "required_services": [
+          "http",
+          "sql",
+          "ssh"
+        ],
+        "required_versions": [],
+        "module": "fenrir.modules.exploit.owasp_top10.owasp_a03",
+        "reliability": "medium",
+        "status": "candidate",
+        "requirements": {
+          "input_validation_bypass": true
+        },
+        "options": {},
+        "resource": "/",
+        "url_resource": "/",
+        "exploit_id": "exploit.local.owasp_a03_injection",
+        "finding_id": "192.168.100.154:22/tcp:ssh",
+        "vulnerability_id": "CVE-2017-5638",
+        "product_match": true,
+        "version_match": true,
+        "service_match": true,
+        "confidence": 0.7,
+        "candidate_status": "compatible"
+      }
+    },
+    {
+      "id": "exploit.local.owasp_a07_authentication_failures",
+      "type": "exploit",
+      "data": {
+        "id": "exploit.local.owasp_a07_authentication_failures",
+        "name": "OWASP Top 10 A07 \u2013 Identification and Authentication Failures pattern",
+        "title": "OWASP Top 10 A07 \u2013 Identification and Authentication Failures pattern",
+        "source": "local",
+        "source_url": "https://nvd.nist.gov/vuln/detail/CVE-2020-1472",
+        "cve_url": "https://nvd.nist.gov/vuln/detail/CVE-2020-1472",
+        "cve_name": "ZeroLogon",
+        "description": "OWASP Top 10 A07 \u2013 Identification and Authentication Failures pattern",
+        "vulnerability_ids": [
+          "CVE-2020-1472",
+          "CVE-2021-26855",
+          "CVE-2024-6387"
+        ],
+        "platforms": [
+          "linux",
+          "windows"
+        ],
+        "architectures": [
+          "x86",
+          "x86_64",
+          "arm64"
+        ],
+        "required_services": [
+          "ldap",
+          "ssh",
+          "http",
+          "ad"
+        ],
+        "required_versions": [],
+        "module": "fenrir.modules.exploit.owasp_top10.owasp_a07",
+        "reliability": "medium",
+        "status": "candidate",
+        "requirements": {
+          "credential_material": true
+        },
+        "options": {},
+        "resource": "/login",
+        "url_resource": "/login",
+        "exploit_id": "exploit.local.owasp_a07_authentication_failures",
+        "finding_id": "192.168.100.154:22/tcp:ssh",
+        "vulnerability_id": "CVE-2020-1472",
+        "product_match": true,
+        "version_match": true,
+        "service_match": true,
+        "confidence": 0.7,
+        "candidate_status": "compatible"
+      }
+    },
+    {
+      "id": "exploit.local.regresshion",
+      "type": "exploit",
+      "data": {
+        "id": "exploit.local.regresshion",
+        "name": "regreSSHion OpenSSH Remote Code Execution (CVE-2024-6387)",
+        "title": "regreSSHion OpenSSH Remote Code Execution (CVE-2024-6387)",
+        "source": "local",
+        "source_url": "https://nvd.nist.gov/vuln/detail/CVE-2024-6387",
+        "cve_url": "https://nvd.nist.gov/vuln/detail/CVE-2024-6387",
+        "cve_name": "regreSSHion",
+        "description": "regreSSHion OpenSSH Remote Code Execution (CVE-2024-6387)",
+        "vulnerability_ids": [
+          "CVE-2024-6387"
+        ],
+        "platforms": [
+          "linux",
+          "macos"
+        ],
+        "architectures": [
+          "x86",
+          "x86_64",
+          "arm64"
+        ],
+        "required_services": [
+          "ssh"
+        ],
+        "required_versions": [],
+        "module": "fenrir.modules.exploit.regresshion.RegreSSHionExploit",
+        "reliability": "high",
+        "status": "candidate",
+        "requirements": {},
+        "options": {},
+        "resource": "/ssh",
+        "url_resource": "/ssh",
+        "exploit_id": "exploit.local.regresshion",
+        "finding_id": "192.168.100.154:22/tcp:ssh",
+        "vulnerability_id": "CVE-2024-6387",
+        "product_match": true,
+        "version_match": true,
+        "service_match": true,
+        "confidence": 0.7,
+        "candidate_status": "compatible"
+      }
+    },
+    {
+      "id": "exploit.local.shellshock",
+      "type": "exploit",
+      "data": {
+        "id": "exploit.local.shellshock",
+        "name": "Shellshock CGI Exploit (CVE-2014-6271)",
+        "title": "Shellshock CGI Exploit (CVE-2014-6271)",
+        "source": "local",
+        "source_url": "https://nvd.nist.gov/vuln/detail/CVE-2014-6271",
+        "cve_url": "https://nvd.nist.gov/vuln/detail/CVE-2014-6271",
+        "cve_name": "Shellshock",
+        "description": "Shellshock CGI Exploit (CVE-2014-6271)",
+        "vulnerability_ids": [
+          "CVE-2014-6271"
+        ],
+        "platforms": [
+          "linux"
+        ],
+        "architectures": [
+          "x86",
+          "x86_64"
+        ],
+        "required_services": [
+          "http"
+        ],
+        "required_versions": [],
+        "module": "fenrir.modules.exploit.shell_shock.ShellShockExploit",
+        "reliability": "medium",
+        "status": "candidate",
+        "requirements": {},
+        "options": {},
+        "resource": "/cgi-bin/",
+        "url_resource": "/cgi-bin/",
+        "exploit_id": "exploit.local.shellshock",
+        "finding_id": "192.168.100.154:80/tcp:http",
+        "vulnerability_id": "CVE-2014-6271",
+        "product_match": true,
+        "version_match": true,
+        "service_match": true,
+        "confidence": 0.7,
+        "candidate_status": "compatible"
+      }
+    },
+    {
+      "id": "exploit.metasploit.apache_log4j",
+      "type": "exploit",
+      "data": {
+        "id": "exploit.metasploit.apache_log4j",
+        "name": "Apache Log4j2 Remote Code Execution (CVE-2021-44228)",
+        "title": "Apache Log4j2 Remote Code Execution (CVE-2021-44228)",
+        "source": "metasploit",
+        "source_url": "https://www.rapid7.com/db/modules/exploit/multi/http/log4j_header_injection",
+        "cve_url": "https://nvd.nist.gov/vuln/detail/CVE-2021-44228",
+        "cve_name": "Log4Shell",
+        "description": "Apache Log4j2 Remote Code Execution (CVE-2021-44228)",
+        "vulnerability_ids": [
+          "CVE-2021-44228"
+        ],
+        "platforms": [
+          "linux",
+          "windows",
+          "macos"
+        ],
+        "architectures": [
+          "x86",
+          "x86_64"
+        ],
+        "required_services": [
+          "http"
+        ],
+        "required_versions": [],
+        "module": "exploit/multi/http/log4j_header_injection",
+        "reliability": "high",
+        "status": "candidate",
+        "requirements": {},
+        "options": {},
+        "resource": "/",
+        "url_resource": "/",
+        "exploit_id": "exploit.metasploit.apache_log4j",
+        "finding_id": "192.168.100.154:80/tcp:http",
+        "vulnerability_id": "CVE-2021-44228",
+        "product_match": true,
+        "version_match": true,
+        "service_match": true,
+        "confidence": 0.7,
+        "candidate_status": "compatible"
+      }
+    },
+    {
+      "id": "exploit.local.owasp_a01_access_control",
+      "type": "exploit",
+      "data": {
+        "id": "exploit.local.owasp_a01_access_control",
+        "name": "OWASP Top 10 A01 \u2013 Broken Access Control / IDOR / privilege escalation pattern",
+        "title": "OWASP Top 10 A01 \u2013 Broken Access Control / IDOR / privilege escalation pattern",
+        "source": "local",
+        "source_url": "https://nvd.nist.gov/vuln/detail/CVE-2020-0688",
+        "cve_url": "https://nvd.nist.gov/vuln/detail/CVE-2020-0688",
+        "cve_name": "CVE-2020-0688",
+        "description": "OWASP Top 10 A01 \u2013 Broken Access Control / IDOR / privilege escalation pattern",
+        "vulnerability_ids": [
+          "CVE-2020-0688",
+          "CVE-2021-26855",
+          "CVE-2021-34527"
+        ],
+        "platforms": [
+          "linux",
+          "windows"
+        ],
+        "architectures": [
+          "x86",
+          "x86_64",
+          "arm64"
+        ],
+        "required_services": [
+          "http",
+          "ldap",
+          "exchange",
+          "ad"
+        ],
+        "required_versions": [],
+        "module": "fenrir.modules.exploit.owasp_top10.owasp_a01",
+        "reliability": "medium",
+        "status": "candidate",
+        "requirements": {
+          "auth_required": true,
+          "review_required": true
+        },
+        "options": {},
+        "resource": "/admin",
+        "url_resource": "/admin",
+        "exploit_id": "exploit.local.owasp_a01_access_control",
+        "finding_id": "192.168.100.154:80/tcp:http",
+        "vulnerability_id": "CVE-2020-0688",
+        "product_match": true,
+        "version_match": true,
+        "service_match": true,
+        "confidence": 0.7,
+        "candidate_status": "compatible"
+      }
+    },
+    {
+      "id": "exploit.local.owasp_a05_security_misconfiguration",
+      "type": "exploit",
+      "data": {
+        "id": "exploit.local.owasp_a05_security_misconfiguration",
+        "name": "OWASP Top 10 A05 \u2013 Security Misconfiguration / default exposure pattern",
+        "title": "OWASP Top 10 A05 \u2013 Security Misconfiguration / default exposure pattern",
+        "source": "local",
+        "source_url": "https://nvd.nist.gov/vuln/detail/CVE-2019-19781",
+        "cve_url": "https://nvd.nist.gov/vuln/detail/CVE-2019-19781",
+        "cve_name": "Citrix ADC XXE / command injection",
+        "description": "OWASP Top 10 A05 \u2013 Security Misconfiguration / default exposure pattern",
+        "vulnerability_ids": [
+          "CVE-2019-19781",
+          "CVE-2020-3452",
+          "CVE-2024-3400"
+        ],
+        "platforms": [
+          "linux",
+          "windows",
+          "network"
+        ],
+        "architectures": [
+          "x86",
+          "x86_64",
+          "arm64"
+        ],
+        "required_services": [
+          "http",
+          "vpn",
+          "gateway"
+        ],
+        "required_versions": [],
+        "module": "fenrir.modules.exploit.owasp_top10.owasp_a05",
+        "reliability": "medium",
+        "status": "candidate",
+        "requirements": {
+          "misconfig_review": true
+        },
+        "options": {},
+        "resource": "/",
+        "url_resource": "/",
+        "exploit_id": "exploit.local.owasp_a05_security_misconfiguration",
+        "finding_id": "192.168.100.154:80/tcp:http",
+        "vulnerability_id": "CVE-2019-19781",
+        "product_match": true,
+        "version_match": true,
+        "service_match": true,
+        "confidence": 0.7,
+        "candidate_status": "compatible"
+      }
+    },
+    {
+      "id": "exploit.local.owasp_a06_vulnerable_components",
+      "type": "exploit",
+      "data": {
+        "id": "exploit.local.owasp_a06_vulnerable_components",
+        "name": "OWASP Top 10 A06 \u2013 Vulnerable and Outdated Components pattern",
+        "title": "OWASP Top 10 A06 \u2013 Vulnerable and Outdated Components pattern",
+        "source": "local",
+        "source_url": "https://nvd.nist.gov/vuln/detail/CVE-2021-44228",
+        "cve_url": "https://nvd.nist.gov/vuln/detail/CVE-2021-44228",
+        "cve_name": "Log4Shell",
+        "description": "OWASP Top 10 A06 \u2013 Vulnerable and Outdated Components pattern",
+        "vulnerability_ids": [
+          "CVE-2021-44228",
+          "CVE-2022-22965",
+          "CVE-2023-34362"
+        ],
+        "platforms": [
+          "linux",
+          "windows",
+          "macos"
+        ],
+        "architectures": [
+          "x86",
+          "x86_64",
+          "arm64"
+        ],
+        "required_services": [
+          "http",
+          "java",
+          "smtp"
+        ],
+        "required_versions": [],
+        "module": "fenrir.modules.exploit.owasp_top10.owasp_a06",
+        "reliability": "high",
+        "status": "candidate",
+        "requirements": {
+          "component_inventory": true
+        },
+        "options": {},
+        "resource": "/",
+        "url_resource": "/",
+        "exploit_id": "exploit.local.owasp_a06_vulnerable_components",
+        "finding_id": "192.168.100.154:80/tcp:http",
+        "vulnerability_id": "CVE-2021-44228",
+        "product_match": true,
+        "version_match": true,
+        "service_match": true,
+        "confidence": 0.7,
+        "candidate_status": "compatible"
+      }
+    },
+    {
+      "id": "exploit.local.owasp_a08_integrity_failures",
+      "type": "exploit",
+      "data": {
+        "id": "exploit.local.owasp_a08_integrity_failures",
+        "name": "OWASP Top 10 A08 \u2013 Software and Data Integrity Failures pattern",
+        "title": "OWASP Top 10 A08 \u2013 Software and Data Integrity Failures pattern",
+        "source": "local",
+        "source_url": "https://nvd.nist.gov/vuln/detail/CVE-2023-46604",
+        "cve_url": "https://nvd.nist.gov/vuln/detail/CVE-2023-46604",
+        "cve_name": "ActiveMQ deserialization",
+        "description": "OWASP Top 10 A08 \u2013 Software and Data Integrity Failures pattern",
+        "vulnerability_ids": [
+          "CVE-2023-46604",
+          "CVE-2024-21887",
+          "CVE-2024-3400"
+        ],
+        "platforms": [
+          "linux",
+          "windows"
+        ],
+        "architectures": [
+          "x86",
+          "x86_64",
+          "arm64"
+        ],
+        "required_services": [
+          "http",
+          "mq",
+          "vpn"
+        ],
+        "required_versions": [],
+        "module": "fenrir.modules.exploit.owasp_top10.owasp_a08",
+        "reliability": "medium",
+        "status": "candidate",
+        "requirements": {
+          "artifact_verification": true
+        },
+        "options": {},
+        "resource": "/",
+        "url_resource": "/",
+        "exploit_id": "exploit.local.owasp_a08_integrity_failures",
+        "finding_id": "192.168.100.154:80/tcp:http",
+        "vulnerability_id": "CVE-2023-46604",
+        "product_match": true,
+        "version_match": true,
+        "service_match": true,
+        "confidence": 0.7,
+        "candidate_status": "compatible"
+      }
+    },
+    {
+      "id": "exploit.local.owasp_a10_ssrf",
+      "type": "exploit",
+      "data": {
+        "id": "exploit.local.owasp_a10_ssrf",
+        "name": "OWASP Top 10 A10 \u2013 Server-Side Request Forgery pattern",
+        "title": "OWASP Top 10 A10 \u2013 Server-Side Request Forgery pattern",
+        "source": "local",
+        "source_url": "https://nvd.nist.gov/vuln/detail/CVE-2021-40438",
+        "cve_url": "https://nvd.nist.gov/vuln/detail/CVE-2021-40438",
+        "cve_name": "Apache mod_proxy SSRF",
+        "description": "OWASP Top 10 A10 \u2013 Server-Side Request Forgery pattern",
+        "vulnerability_ids": [
+          "CVE-2021-40438",
+          "CVE-2024-21887",
+          "CVE-2023-34362"
+        ],
+        "platforms": [
+          "linux",
+          "windows"
+        ],
+        "architectures": [
+          "x86",
+          "x86_64",
+          "arm64"
+        ],
+        "required_services": [
+          "http",
+          "proxy",
+          "api"
+        ],
+        "required_versions": [],
+        "module": "fenrir.modules.exploit.owasp_top10.owasp_a10",
+        "reliability": "medium",
+        "status": "candidate",
+        "requirements": {
+          "outbound_access_check": true
+        },
+        "options": {},
+        "resource": "/",
+        "url_resource": "/",
+        "exploit_id": "exploit.local.owasp_a10_ssrf",
+        "finding_id": "192.168.100.154:80/tcp:http",
+        "vulnerability_id": "CVE-2021-40438",
+        "product_match": true,
+        "version_match": true,
+        "service_match": true,
+        "confidence": 0.7,
+        "candidate_status": "compatible"
+      }
+    },
+    {
+      "id": "exploit.local.pulse_secure",
+      "type": "exploit",
+      "data": {
+        "id": "exploit.local.pulse_secure",
+        "name": "Pulse Secure Arbitrary File Read / RCE (CVE-2019-11510)",
+        "title": "Pulse Secure Arbitrary File Read / RCE (CVE-2019-11510)",
+        "source": "local",
+        "source_url": "https://nvd.nist.gov/vuln/detail/CVE-2019-11510",
+        "cve_url": "https://nvd.nist.gov/vuln/detail/CVE-2019-11510",
+        "cve_name": "Pulse Secure arbitrary file read",
+        "description": "Pulse Secure Arbitrary File Read / RCE (CVE-2019-11510)",
+        "vulnerability_ids": [
+          "CVE-2019-11510"
+        ],
+        "platforms": [
+          "linux"
+        ],
+        "architectures": [
+          "x86",
+          "x86_64"
+        ],
+        "required_services": [
+          "http"
+        ],
+        "required_versions": [],
+        "module": "fenrir.modules.exploit.pulse_secure.PulseSecureExploit",
+        "reliability": "high",
+        "status": "candidate",
+        "requirements": {},
+        "options": {},
+        "resource": "/",
+        "url_resource": "/",
+        "exploit_id": "exploit.local.pulse_secure",
+        "finding_id": "192.168.100.154:80/tcp:http",
+        "vulnerability_id": "CVE-2019-11510",
+        "product_match": true,
+        "version_match": true,
+        "service_match": true,
+        "confidence": 0.7,
+        "candidate_status": "compatible"
+      }
+    },
+    {
+      "id": "exploit.local.citrix_adc",
+      "type": "exploit",
+      "data": {
+        "id": "exploit.local.citrix_adc",
+        "name": "Citrix ADC / Gateway Remote Code Execution (CVE-2019-19781)",
+        "title": "Citrix ADC / Gateway Remote Code Execution (CVE-2019-19781)",
+        "source": "local",
+        "source_url": "https://nvd.nist.gov/vuln/detail/CVE-2019-19781",
+        "cve_url": "https://nvd.nist.gov/vuln/detail/CVE-2019-19781",
+        "cve_name": "Citrix ADC XXE / command injection",
+        "description": "Citrix ADC / Gateway Remote Code Execution (CVE-2019-19781)",
+        "vulnerability_ids": [
+          "CVE-2019-19781"
+        ],
+        "platforms": [
+          "linux"
+        ],
+        "architectures": [
+          "x86",
+          "x86_64"
+        ],
+        "required_services": [
+          "http"
+        ],
+        "required_versions": [],
+        "module": "fenrir.modules.exploit.citrix_adc.CitrixADCExploit",
+        "reliability": "high",
+        "status": "candidate",
+        "requirements": {},
+        "options": {},
+        "resource": "/",
+        "url_resource": "/",
+        "exploit_id": "exploit.local.citrix_adc",
+        "finding_id": "192.168.100.154:80/tcp:http",
+        "vulnerability_id": "CVE-2019-19781",
+        "product_match": true,
+        "version_match": true,
+        "service_match": true,
+        "confidence": 0.7,
+        "candidate_status": "compatible"
+      }
+    },
+    {
+      "id": "exploit.local.cisco_asa",
+      "type": "exploit",
+      "data": {
+        "id": "exploit.local.cisco_asa",
+        "name": "Cisco ASA Remote Code Execution / SSRF (CVE-2020-3452)",
+        "title": "Cisco ASA Remote Code Execution / SSRF (CVE-2020-3452)",
+        "source": "local",
+        "source_url": "https://nvd.nist.gov/vuln/detail/CVE-2020-3452",
+        "cve_url": "https://nvd.nist.gov/vuln/detail/CVE-2020-3452",
+        "cve_name": "Cisco ASA authentication bypass",
+        "description": "Cisco ASA Remote Code Execution / SSRF (CVE-2020-3452)",
+        "vulnerability_ids": [
+          "CVE-2020-3452"
+        ],
+        "platforms": [
+          "ios",
+          "network"
+        ],
+        "architectures": [
+          "x86",
+          "x86_64"
+        ],
+        "required_services": [
+          "http"
+        ],
+        "required_versions": [],
+        "module": "fenrir.modules.exploit.cisco_asa.CiscoASAExploit",
+        "reliability": "high",
+        "status": "candidate",
+        "requirements": {},
+        "options": {},
+        "resource": "/",
+        "url_resource": "/",
+        "exploit_id": "exploit.local.cisco_asa",
+        "finding_id": "192.168.100.154:80/tcp:http",
+        "vulnerability_id": "CVE-2020-3452",
+        "product_match": true,
+        "version_match": true,
+        "service_match": true,
+        "confidence": 0.7,
+        "candidate_status": "compatible"
+      }
+    },
+    {
+      "id": "exploit.local.exchange_proxylogon",
+      "type": "exploit",
+      "data": {
+        "id": "exploit.local.exchange_proxylogon",
+        "name": "Exchange ProxyLogon RCE (CVE-2021-26855)",
+        "title": "Exchange ProxyLogon RCE (CVE-2021-26855)",
+        "source": "local",
+        "source_url": "https://nvd.nist.gov/vuln/detail/CVE-2021-26855",
+        "cve_url": "https://nvd.nist.gov/vuln/detail/CVE-2021-26855",
+        "cve_name": "ProxyLogon",
+        "description": "Exchange ProxyLogon RCE (CVE-2021-26855)",
+        "vulnerability_ids": [
+          "CVE-2021-26855",
+          "CVE-2021-27065"
+        ],
+        "platforms": [
+          "windows"
+        ],
+        "architectures": [
+          "x86",
+          "x86_64"
+        ],
+        "required_services": [
+          "http",
+          "exchange"
+        ],
+        "required_versions": [],
+        "module": "fenrir.modules.exploit.exchange_proxylogon.ExchangeProxyLogonExploit",
+        "reliability": "high",
+        "status": "candidate",
+        "requirements": {},
+        "options": {},
+        "resource": "/ecp",
+        "url_resource": "/ecp",
+        "exploit_id": "exploit.local.exchange_proxylogon",
+        "finding_id": "192.168.100.154:80/tcp:http",
+        "vulnerability_id": "CVE-2021-26855",
+        "product_match": true,
+        "version_match": true,
+        "service_match": true,
+        "confidence": 0.7,
+        "candidate_status": "compatible"
+      }
+    },
+    {
+      "id": "exploit.local.apache_mod_proxy_ssrf",
+      "type": "exploit",
+      "data": {
+        "id": "exploit.local.apache_mod_proxy_ssrf",
+        "name": "Apache HTTP Server mod_proxy SSRF / request smuggling pattern (CVE-2021-40438)",
+        "title": "Apache HTTP Server mod_proxy SSRF / request smuggling pattern (CVE-2021-40438)",
+        "source": "local",
+        "source_url": "https://nvd.nist.gov/vuln/detail/CVE-2021-40438",
+        "cve_url": "https://nvd.nist.gov/vuln/detail/CVE-2021-40438",
+        "cve_name": "Apache mod_proxy SSRF",
+        "description": "Apache HTTP Server mod_proxy SSRF / request smuggling pattern (CVE-2021-40438)",
+        "vulnerability_ids": [
+          "CVE-2021-40438"
+        ],
+        "platforms": [
+          "linux",
+          "windows"
+        ],
+        "architectures": [
+          "x86",
+          "x86_64"
+        ],
+        "required_services": [
+          "http"
+        ],
+        "required_versions": [],
+        "module": "fenrir.modules.exploit.apache_mod_proxy_ssrf.ModProxySSRFExploit",
+        "reliability": "medium",
+        "status": "candidate",
+        "requirements": {},
+        "options": {},
+        "resource": "/",
+        "url_resource": "/",
+        "exploit_id": "exploit.local.apache_mod_proxy_ssrf",
+        "finding_id": "192.168.100.154:80/tcp:http",
+        "vulnerability_id": "CVE-2021-40438",
+        "product_match": true,
+        "version_match": true,
+        "service_match": true,
+        "confidence": 0.7,
+        "candidate_status": "compatible"
+      }
+    },
+    {
+      "id": "exploit.local.f5_bigip",
+      "type": "exploit",
+      "data": {
+        "id": "exploit.local.f5_bigip",
+        "name": "F5 BIG-IP Remote Code Execution (CVE-2022-1388)",
+        "title": "F5 BIG-IP Remote Code Execution (CVE-2022-1388)",
+        "source": "local",
+        "source_url": "https://nvd.nist.gov/vuln/detail/CVE-2022-1388",
+        "cve_url": "https://nvd.nist.gov/vuln/detail/CVE-2022-1388",
+        "cve_name": "F5 BIG-IP iControl REST RCE",
+        "description": "F5 BIG-IP Remote Code Execution (CVE-2022-1388)",
+        "vulnerability_ids": [
+          "CVE-2022-1388"
+        ],
+        "platforms": [
+          "linux"
+        ],
+        "architectures": [
+          "x86",
+          "x86_64",
+          "arm64"
+        ],
+        "required_services": [
+          "http"
+        ],
+        "required_versions": [],
+        "module": "fenrir.modules.exploit.f5_bigip.F5BigIPExploit",
+        "reliability": "high",
+        "status": "candidate",
+        "requirements": {},
+        "options": {},
+        "resource": "/",
+        "url_resource": "/",
+        "exploit_id": "exploit.local.f5_bigip",
+        "finding_id": "192.168.100.154:80/tcp:http",
+        "vulnerability_id": "CVE-2022-1388",
+        "product_match": true,
+        "version_match": true,
+        "service_match": true,
+        "confidence": 0.7,
+        "candidate_status": "compatible"
+      }
+    },
+    {
+      "id": "exploit.local.spring4shell",
+      "type": "exploit",
+      "data": {
+        "id": "exploit.local.spring4shell",
+        "name": "Spring4Shell Remote Code Execution (CVE-2022-22965)",
+        "title": "Spring4Shell Remote Code Execution (CVE-2022-22965)",
+        "source": "local",
+        "source_url": "https://nvd.nist.gov/vuln/detail/CVE-2022-22965",
+        "cve_url": "https://nvd.nist.gov/vuln/detail/CVE-2022-22965",
+        "cve_name": "Spring4Shell",
+        "description": "Spring4Shell Remote Code Execution (CVE-2022-22965)",
+        "vulnerability_ids": [
+          "CVE-2022-22965"
+        ],
+        "platforms": [
+          "linux",
+          "windows",
+          "macos"
+        ],
+        "architectures": [
+          "x86",
+          "x86_64",
+          "arm64"
+        ],
+        "required_services": [
+          "http",
+          "java"
+        ],
+        "required_versions": [],
+        "module": "fenrir.modules.exploit.spring4shell.Spring4ShellExploit",
+        "reliability": "high",
+        "status": "candidate",
+        "requirements": {},
+        "options": {},
+        "resource": "/",
+        "url_resource": "/",
+        "exploit_id": "exploit.local.spring4shell",
+        "finding_id": "192.168.100.154:80/tcp:http",
+        "vulnerability_id": "CVE-2022-22965",
+        "product_match": true,
+        "version_match": true,
+        "service_match": true,
+        "confidence": 0.7,
+        "candidate_status": "compatible"
+      }
+    },
+    {
+      "id": "exploit.local.moveit_transfer",
+      "type": "exploit",
+      "data": {
+        "id": "exploit.local.moveit_transfer",
+        "name": "MOVEit Transfer SQL injection / RCE (CVE-2023-34362)",
+        "title": "MOVEit Transfer SQL injection / RCE (CVE-2023-34362)",
+        "source": "local",
+        "source_url": "https://nvd.nist.gov/vuln/detail/CVE-2023-34362",
+        "cve_url": "https://nvd.nist.gov/vuln/detail/CVE-2023-34362",
+        "cve_name": "MOVEit Transfer SQLi / RCE",
+        "description": "MOVEit Transfer SQL injection / RCE (CVE-2023-34362)",
+        "vulnerability_ids": [
+          "CVE-2023-34362"
+        ],
+        "platforms": [
+          "windows",
+          "linux"
+        ],
+        "architectures": [
+          "x86",
+          "x86_64"
+        ],
+        "required_services": [
+          "http",
+          "sql"
+        ],
+        "required_versions": [],
+        "module": "fenrir.modules.exploit.moveit_transfer.MOVEitTransferExploit",
+        "reliability": "high",
+        "status": "candidate",
+        "requirements": {},
+        "options": {},
+        "resource": "/",
+        "url_resource": "/",
+        "exploit_id": "exploit.local.moveit_transfer",
+        "finding_id": "192.168.100.154:80/tcp:http",
+        "vulnerability_id": "CVE-2023-34362",
+        "product_match": true,
+        "version_match": true,
+        "service_match": true,
+        "confidence": 0.7,
+        "candidate_status": "compatible"
+      }
+    },
+    {
+      "id": "exploit.local.activemq_rce",
+      "type": "exploit",
+      "data": {
+        "id": "exploit.local.activemq_rce",
+        "name": "Apache ActiveMQ Deserialization / RCE (CVE-2023-46604)",
+        "title": "Apache ActiveMQ Deserialization / RCE (CVE-2023-46604)",
+        "source": "local",
+        "source_url": "https://nvd.nist.gov/vuln/detail/CVE-2023-46604",
+        "cve_url": "https://nvd.nist.gov/vuln/detail/CVE-2023-46604",
+        "cve_name": "ActiveMQ deserialization",
+        "description": "Apache ActiveMQ Deserialization / RCE (CVE-2023-46604)",
+        "vulnerability_ids": [
+          "CVE-2023-46604"
+        ],
+        "platforms": [
+          "linux",
+          "windows"
+        ],
+        "architectures": [
+          "x86",
+          "x86_64",
+          "arm64"
+        ],
+        "required_services": [
+          "jms",
+          "http"
+        ],
+        "required_versions": [],
+        "module": "fenrir.modules.exploit.activemq_rce.ActiveMQRCEExploit",
+        "reliability": "high",
+        "status": "candidate",
+        "requirements": {},
+        "options": {},
+        "resource": "/admin",
+        "url_resource": "/admin",
+        "exploit_id": "exploit.local.activemq_rce",
+        "finding_id": "192.168.100.154:80/tcp:http",
+        "vulnerability_id": "CVE-2023-46604",
+        "product_match": true,
+        "version_match": true,
+        "service_match": true,
+        "confidence": 0.7,
+        "candidate_status": "compatible"
+      }
+    },
+    {
+      "id": "exploit.local.panos_command_injection",
+      "type": "exploit",
+      "data": {
+        "id": "exploit.local.panos_command_injection",
+        "name": "PAN-OS Command Injection (CVE-2024-3400)",
+        "title": "PAN-OS Command Injection (CVE-2024-3400)",
+        "source": "local",
+        "source_url": "https://nvd.nist.gov/vuln/detail/CVE-2024-3400",
+        "cve_url": "https://nvd.nist.gov/vuln/detail/CVE-2024-3400",
+        "cve_name": "PAN-OS command injection",
+        "description": "PAN-OS Command Injection (CVE-2024-3400)",
+        "vulnerability_ids": [
+          "CVE-2024-3400"
+        ],
+        "platforms": [
+          "linux"
+        ],
+        "architectures": [
+          "x86",
+          "x86_64"
+        ],
+        "required_services": [
+          "http"
+        ],
+        "required_versions": [],
+        "module": "fenrir.modules.exploit.panos_command_injection.PANOSCommandInjectionExploit",
+        "reliability": "high",
+        "status": "candidate",
+        "requirements": {},
+        "options": {},
+        "resource": "/",
+        "url_resource": "/",
+        "exploit_id": "exploit.local.panos_command_injection",
+        "finding_id": "192.168.100.154:80/tcp:http",
+        "vulnerability_id": "CVE-2024-3400",
+        "product_match": true,
+        "version_match": true,
+        "service_match": true,
+        "confidence": 0.7,
+        "candidate_status": "compatible"
+      }
+    },
+    {
+      "id": "exploit.local.ivanti_connect_secure",
+      "type": "exploit",
+      "data": {
+        "id": "exploit.local.ivanti_connect_secure",
+        "name": "Ivanti Connect Secure / Policy Secure Command Injection (CVE-2024-21887)",
+        "title": "Ivanti Connect Secure / Policy Secure Command Injection (CVE-2024-21887)",
+        "source": "local",
+        "source_url": "https://nvd.nist.gov/vuln/detail/CVE-2024-21887",
+        "cve_url": "https://nvd.nist.gov/vuln/detail/CVE-2024-21887",
+        "cve_name": "Ivanti Connect Secure command injection",
+        "description": "Ivanti Connect Secure / Policy Secure Command Injection (CVE-2024-21887)",
+        "vulnerability_ids": [
+          "CVE-2024-21887"
+        ],
+        "platforms": [
+          "linux"
+        ],
+        "architectures": [
+          "x86",
+          "x86_64"
+        ],
+        "required_services": [
+          "http"
+        ],
+        "required_versions": [],
+        "module": "fenrir.modules.exploit.ivanti_connect_secure.IvantiConnectSecureExploit",
+        "reliability": "high",
+        "status": "candidate",
+        "requirements": {},
+        "options": {},
+        "resource": "/",
+        "url_resource": "/",
+        "exploit_id": "exploit.local.ivanti_connect_secure",
+        "finding_id": "192.168.100.154:80/tcp:http",
+        "vulnerability_id": "CVE-2024-21887",
+        "product_match": true,
+        "version_match": true,
+        "service_match": true,
+        "confidence": 0.7,
+        "candidate_status": "compatible"
+      }
+    },
+    {
+      "id": "68891d14-4011-4899-8c63-c6366000de8f",
+      "type": "exploit_result",
+      "data": {
+        "id": "68891d14-4011-4899-8c63-c6366000de8f",
+        "exploit_id": "exploit.metasploit.vsftpd_234_backdoor",
+        "target": "unknown",
+        "status": "blocked",
+        "evidence": [],
+        "session_id": null,
+        "error": "execution disabled: review candidate and authorization first"
+      }
+    },
+    {
+      "id": "d3431271-c486-495c-971b-cedbcaf59886",
+      "type": "exploit_result",
+      "data": {
+        "id": "d3431271-c486-495c-971b-cedbcaf59886",
+        "exploit_id": "exploit.local.ftp_brute",
+        "target": "unknown",
+        "status": "blocked",
+        "evidence": [],
+        "session_id": null,
+        "error": "execution disabled: review candidate and authorization first"
+      }
+    },
+    {
+      "id": "39734f48-ad6a-4ecf-b277-84ce0ab8b09b",
+      "type": "exploit_result",
+      "data": {
+        "id": "39734f48-ad6a-4ecf-b277-84ce0ab8b09b",
+        "exploit_id": "exploit.local.ssh_brute",
+        "target": "unknown",
+        "status": "blocked",
+        "evidence": [],
+        "session_id": null,
+        "error": "execution disabled: review candidate and authorization first"
+      }
+    },
+    {
+      "id": "395e262d-c846-4704-bc56-ee73fe49eba2",
+      "type": "exploit_result",
+      "data": {
+        "id": "395e262d-c846-4704-bc56-ee73fe49eba2",
+        "exploit_id": "exploit.local.wordlist_orchestrator",
+        "target": "unknown",
+        "status": "blocked",
+        "evidence": [],
+        "session_id": null,
+        "error": "execution disabled: review candidate and authorization first"
+      }
+    },
+    {
+      "id": "dd4c4852-8936-4c49-9bce-d991558f8c4d",
+      "type": "exploit_result",
+      "data": {
+        "id": "dd4c4852-8936-4c49-9bce-d991558f8c4d",
+        "exploit_id": "exploit.local.owasp_a03_injection",
+        "target": "unknown",
+        "status": "blocked",
+        "evidence": [],
+        "session_id": null,
+        "error": "execution disabled: review candidate and authorization first"
+      }
+    },
+    {
+      "id": "9bb9bc1e-9e2b-4206-951c-d2883d7717ff",
+      "type": "exploit_result",
+      "data": {
+        "id": "9bb9bc1e-9e2b-4206-951c-d2883d7717ff",
+        "exploit_id": "exploit.local.owasp_a07_authentication_failures",
+        "target": "unknown",
+        "status": "blocked",
+        "evidence": [],
+        "session_id": null,
+        "error": "execution disabled: review candidate and authorization first"
+      }
+    },
+    {
+      "id": "a4d36a88-be4a-421f-9c4b-e6315717209d",
+      "type": "exploit_result",
+      "data": {
+        "id": "a4d36a88-be4a-421f-9c4b-e6315717209d",
+        "exploit_id": "exploit.local.regresshion",
+        "target": "unknown",
+        "status": "blocked",
+        "evidence": [],
+        "session_id": null,
+        "error": "execution disabled: review candidate and authorization first"
+      }
+    },
+    {
+      "id": "dfb17cfd-2739-40b9-aef2-1a0139bd1315",
+      "type": "exploit_result",
+      "data": {
+        "id": "dfb17cfd-2739-40b9-aef2-1a0139bd1315",
+        "exploit_id": "exploit.local.shellshock",
+        "target": "unknown",
+        "status": "blocked",
+        "evidence": [],
+        "session_id": null,
+        "error": "execution disabled: review candidate and authorization first"
+      }
+    },
+    {
+      "id": "988b6441-43e1-4f4a-8d36-abe6bfffe234",
+      "type": "exploit_result",
+      "data": {
+        "id": "988b6441-43e1-4f4a-8d36-abe6bfffe234",
+        "exploit_id": "exploit.metasploit.apache_log4j",
+        "target": "unknown",
+        "status": "blocked",
+        "evidence": [],
+        "session_id": null,
+        "error": "execution disabled: review candidate and authorization first"
+      }
+    },
+    {
+      "id": "fe4c9e8b-b7b5-4234-8ce2-f3199b871e98",
+      "type": "exploit_result",
+      "data": {
+        "id": "fe4c9e8b-b7b5-4234-8ce2-f3199b871e98",
+        "exploit_id": "exploit.local.owasp_a01_access_control",
+        "target": "unknown",
+        "status": "blocked",
+        "evidence": [],
+        "session_id": null,
+        "error": "execution disabled: review candidate and authorization first"
+      }
+    },
+    {
+      "id": "feec3a69-1830-49ca-8379-6406352be1df",
+      "type": "exploit_result",
+      "data": {
+        "id": "feec3a69-1830-49ca-8379-6406352be1df",
+        "exploit_id": "exploit.local.owasp_a05_security_misconfiguration",
+        "target": "unknown",
+        "status": "blocked",
+        "evidence": [],
+        "session_id": null,
+        "error": "execution disabled: review candidate and authorization first"
+      }
+    },
+    {
+      "id": "94189e6c-4777-4ede-bebe-36fff3264d42",
+      "type": "exploit_result",
+      "data": {
+        "id": "94189e6c-4777-4ede-bebe-36fff3264d42",
+        "exploit_id": "exploit.local.owasp_a06_vulnerable_components",
+        "target": "unknown",
+        "status": "blocked",
+        "evidence": [],
+        "session_id": null,
+        "error": "execution disabled: review candidate and authorization first"
+      }
+    },
+    {
+      "id": "2a799644-f1ed-4574-adcf-c0cd415f923a",
+      "type": "exploit_result",
+      "data": {
+        "id": "2a799644-f1ed-4574-adcf-c0cd415f923a",
+        "exploit_id": "exploit.local.owasp_a08_integrity_failures",
+        "target": "unknown",
+        "status": "blocked",
+        "evidence": [],
+        "session_id": null,
+        "error": "execution disabled: review candidate and authorization first"
+      }
+    },
+    {
+      "id": "df4c193d-b5ef-4d7e-a86b-6147408a9c95",
+      "type": "exploit_result",
+      "data": {
+        "id": "df4c193d-b5ef-4d7e-a86b-6147408a9c95",
+        "exploit_id": "exploit.local.owasp_a10_ssrf",
+        "target": "unknown",
+        "status": "blocked",
+        "evidence": [],
+        "session_id": null,
+        "error": "execution disabled: review candidate and authorization first"
+      }
+    },
+    {
+      "id": "fad10219-75f6-4219-a20a-b56aa4a55014",
+      "type": "exploit_result",
+      "data": {
+        "id": "fad10219-75f6-4219-a20a-b56aa4a55014",
+        "exploit_id": "exploit.local.pulse_secure",
+        "target": "unknown",
+        "status": "blocked",
+        "evidence": [],
+        "session_id": null,
+        "error": "execution disabled: review candidate and authorization first"
+      }
+    },
+    {
+      "id": "fd1b34c8-eada-4d03-b0d6-415c335c7f1b",
+      "type": "exploit_result",
+      "data": {
+        "id": "fd1b34c8-eada-4d03-b0d6-415c335c7f1b",
+        "exploit_id": "exploit.local.citrix_adc",
+        "target": "unknown",
+        "status": "blocked",
+        "evidence": [],
+        "session_id": null,
+        "error": "execution disabled: review candidate and authorization first"
+      }
+    },
+    {
+      "id": "a4825aeb-7c8b-45bd-b52e-7fcf2b487cc8",
+      "type": "exploit_result",
+      "data": {
+        "id": "a4825aeb-7c8b-45bd-b52e-7fcf2b487cc8",
+        "exploit_id": "exploit.local.cisco_asa",
+        "target": "unknown",
+        "status": "blocked",
+        "evidence": [],
+        "session_id": null,
+        "error": "execution disabled: review candidate and authorization first"
+      }
+    },
+    {
+      "id": "3fd719b9-372c-440e-b8c0-dbf7dc740a42",
+      "type": "exploit_result",
+      "data": {
+        "id": "3fd719b9-372c-440e-b8c0-dbf7dc740a42",
+        "exploit_id": "exploit.local.exchange_proxylogon",
+        "target": "unknown",
+        "status": "blocked",
+        "evidence": [],
+        "session_id": null,
+        "error": "execution disabled: review candidate and authorization first"
+      }
+    },
+    {
+      "id": "a3c8a5f4-2233-4127-aaa7-e9a6a74fb0c3",
+      "type": "exploit_result",
+      "data": {
+        "id": "a3c8a5f4-2233-4127-aaa7-e9a6a74fb0c3",
+        "exploit_id": "exploit.local.apache_mod_proxy_ssrf",
+        "target": "unknown",
+        "status": "blocked",
+        "evidence": [],
+        "session_id": null,
+        "error": "execution disabled: review candidate and authorization first"
+      }
+    },
+    {
+      "id": "18a754bc-ead0-4645-b419-c9584e0a9251",
+      "type": "exploit_result",
+      "data": {
+        "id": "18a754bc-ead0-4645-b419-c9584e0a9251",
+        "exploit_id": "exploit.local.f5_bigip",
+        "target": "unknown",
+        "status": "blocked",
+        "evidence": [],
+        "session_id": null,
+        "error": "execution disabled: review candidate and authorization first"
+      }
+    },
+    {
+      "id": "99ed73ea-6a22-4490-b973-2d954dbed37c",
+      "type": "exploit_result",
+      "data": {
+        "id": "99ed73ea-6a22-4490-b973-2d954dbed37c",
+        "exploit_id": "exploit.local.spring4shell",
+        "target": "unknown",
+        "status": "blocked",
+        "evidence": [],
+        "session_id": null,
+        "error": "execution disabled: review candidate and authorization first"
+      }
+    },
+    {
+      "id": "b86715c1-94f4-49f3-94f5-a8179aa2c1e8",
+      "type": "exploit_result",
+      "data": {
+        "id": "b86715c1-94f4-49f3-94f5-a8179aa2c1e8",
+        "exploit_id": "exploit.local.moveit_transfer",
+        "target": "unknown",
+        "status": "blocked",
+        "evidence": [],
+        "session_id": null,
+        "error": "execution disabled: review candidate and authorization first"
+      }
+    },
+    {
+      "id": "5d47b06c-cdb8-4250-8d8c-728874cadcbe",
+      "type": "exploit_result",
+      "data": {
+        "id": "5d47b06c-cdb8-4250-8d8c-728874cadcbe",
+        "exploit_id": "exploit.local.activemq_rce",
+        "target": "unknown",
+        "status": "blocked",
+        "evidence": [],
+        "session_id": null,
+        "error": "execution disabled: review candidate and authorization first"
+      }
+    },
+    {
+      "id": "1560903f-ea8a-4b5b-ae40-211fc3cb010a",
+      "type": "exploit_result",
+      "data": {
+        "id": "1560903f-ea8a-4b5b-ae40-211fc3cb010a",
+        "exploit_id": "exploit.local.panos_command_injection",
+        "target": "unknown",
+        "status": "blocked",
+        "evidence": [],
+        "session_id": null,
+        "error": "execution disabled: review candidate and authorization first"
+      }
+    },
+    {
+      "id": "2b66e944-19ce-4cd8-b5fb-767a9262dd73",
+      "type": "exploit_result",
+      "data": {
+        "id": "2b66e944-19ce-4cd8-b5fb-767a9262dd73",
+        "exploit_id": "exploit.local.ivanti_connect_secure",
+        "target": "unknown",
+        "status": "blocked",
+        "evidence": [],
+        "session_id": null,
+        "error": "execution disabled: review candidate and authorization first"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "src": "192.168.100.154",
+      "dst": "192.168.100.154",
+      "relation": "resolves_to"
+    },
+    {
+      "src": "192.168.100.154",
+      "dst": "192.168.100.154:21/tcp",
+      "relation": "has_port"
+    },
+    {
+      "src": "192.168.100.154",
+      "dst": "192.168.100.154:22/tcp",
+      "relation": "has_port"
+    },
+    {
+      "src": "192.168.100.154",
+      "dst": "192.168.100.154:80/tcp",
+      "relation": "has_port"
+    },
+    {
+      "src": "192.168.100.154",
+      "dst": "192.168.100.154:445/tcp",
+      "relation": "has_port"
+    },
+    {
+      "src": "192.168.100.154",
+      "dst": "192.168.100.154:2222/tcp",
+      "relation": "has_port"
+    },
+    {
+      "src": "192.168.100.154",
+      "dst": "192.168.100.154:3000/tcp",
+      "relation": "has_port"
+    },
+    {
+      "src": "192.168.100.154",
+      "dst": "192.168.100.154:8080/tcp",
+      "relation": "has_port"
+    },
+    {
+      "src": "192.168.100.154:21/tcp:ftp",
+      "dst": "exploit.metasploit.vsftpd_234_backdoor",
+      "relation": "has_exploit"
+    },
+    {
+      "src": "192.168.100.154:21/tcp:ftp",
+      "dst": "exploit.local.ftp_brute",
+      "relation": "has_exploit"
+    },
+    {
+      "src": "192.168.100.154:22/tcp:ssh",
+      "dst": "exploit.local.ssh_brute",
+      "relation": "has_exploit"
+    },
+    {
+      "src": "192.168.100.154:22/tcp:ssh",
+      "dst": "exploit.local.wordlist_orchestrator",
+      "relation": "has_exploit"
+    },
+    {
+      "src": "192.168.100.154:22/tcp:ssh",
+      "dst": "exploit.local.owasp_a03_injection",
+      "relation": "has_exploit"
+    },
+    {
+      "src": "192.168.100.154:22/tcp:ssh",
+      "dst": "exploit.local.owasp_a07_authentication_failures",
+      "relation": "has_exploit"
+    },
+    {
+      "src": "192.168.100.154:22/tcp:ssh",
+      "dst": "exploit.local.regresshion",
+      "relation": "has_exploit"
+    },
+    {
+      "src": "192.168.100.154:80/tcp:http",
+      "dst": "exploit.local.shellshock",
+      "relation": "has_exploit"
+    },
+    {
+      "src": "192.168.100.154:80/tcp:http",
+      "dst": "exploit.metasploit.apache_log4j",
+      "relation": "has_exploit"
+    },
+    {
+      "src": "192.168.100.154:80/tcp:http",
+      "dst": "exploit.local.owasp_a01_access_control",
+      "relation": "has_exploit"
+    },
+    {
+      "src": "192.168.100.154:80/tcp:http",
+      "dst": "exploit.local.owasp_a05_security_misconfiguration",
+      "relation": "has_exploit"
+    },
+    {
+      "src": "192.168.100.154:80/tcp:http",
+      "dst": "exploit.local.owasp_a06_vulnerable_components",
+      "relation": "has_exploit"
+    },
+    {
+      "src": "192.168.100.154:80/tcp:http",
+      "dst": "exploit.local.owasp_a08_integrity_failures",
+      "relation": "has_exploit"
+    },
+    {
+      "src": "192.168.100.154:80/tcp:http",
+      "dst": "exploit.local.owasp_a10_ssrf",
+      "relation": "has_exploit"
+    },
+    {
+      "src": "192.168.100.154:80/tcp:http",
+      "dst": "exploit.local.pulse_secure",
+      "relation": "has_exploit"
+    },
+    {
+      "src": "192.168.100.154:80/tcp:http",
+      "dst": "exploit.local.citrix_adc",
+      "relation": "has_exploit"
+    },
+    {
+      "src": "192.168.100.154:80/tcp:http",
+      "dst": "exploit.local.cisco_asa",
+      "relation": "has_exploit"
+    },
+    {
+      "src": "192.168.100.154:80/tcp:http",
+      "dst": "exploit.local.exchange_proxylogon",
+      "relation": "has_exploit"
+    },
+    {
+      "src": "192.168.100.154:80/tcp:http",
+      "dst": "exploit.local.apache_mod_proxy_ssrf",
+      "relation": "has_exploit"
+    },
+    {
+      "src": "192.168.100.154:80/tcp:http",
+      "dst": "exploit.local.f5_bigip",
+      "relation": "has_exploit"
+    },
+    {
+      "src": "192.168.100.154:80/tcp:http",
+      "dst": "exploit.local.spring4shell",
+      "relation": "has_exploit"
+    },
+    {
+      "src": "192.168.100.154:80/tcp:http",
+      "dst": "exploit.local.moveit_transfer",
+      "relation": "has_exploit"
+    },
+    {
+      "src": "192.168.100.154:80/tcp:http",
+      "dst": "exploit.local.activemq_rce",
+      "relation": "has_exploit"
+    },
+    {
+      "src": "192.168.100.154:80/tcp:http",
+      "dst": "exploit.local.panos_command_injection",
+      "relation": "has_exploit"
+    },
+    {
+      "src": "192.168.100.154:80/tcp:http",
+      "dst": "exploit.local.ivanti_connect_secure",
+      "relation": "has_exploit"
+    },
+    {
+      "src": "exploit.metasploit.vsftpd_234_backdoor",
+      "dst": "68891d14-4011-4899-8c63-c6366000de8f",
+      "relation": "has_result"
+    },
+    {
+      "src": "exploit.local.ftp_brute",
+      "dst": "d3431271-c486-495c-971b-cedbcaf59886",
+      "relation": "has_result"
+    },
+    {
+      "src": "exploit.local.ssh_brute",
+      "dst": "39734f48-ad6a-4ecf-b277-84ce0ab8b09b",
+      "relation": "has_result"
+    },
+    {
+      "src": "exploit.local.wordlist_orchestrator",
+      "dst": "395e262d-c846-4704-bc56-ee73fe49eba2",
+      "relation": "has_result"
+    },
+    {
+      "src": "exploit.local.owasp_a03_injection",
+      "dst": "dd4c4852-8936-4c49-9bce-d991558f8c4d",
+      "relation": "has_result"
+    },
+    {
+      "src": "exploit.local.owasp_a07_authentication_failures",
+      "dst": "9bb9bc1e-9e2b-4206-951c-d2883d7717ff",
+      "relation": "has_result"
+    },
+    {
+      "src": "exploit.local.regresshion",
+      "dst": "a4d36a88-be4a-421f-9c4b-e6315717209d",
+      "relation": "has_result"
+    },
+    {
+      "src": "exploit.local.shellshock",
+      "dst": "dfb17cfd-2739-40b9-aef2-1a0139bd1315",
+      "relation": "has_result"
+    },
+    {
+      "src": "exploit.metasploit.apache_log4j",
+      "dst": "988b6441-43e1-4f4a-8d36-abe6bfffe234",
+      "relation": "has_result"
+    },
+    {
+      "src": "exploit.local.owasp_a01_access_control",
+      "dst": "fe4c9e8b-b7b5-4234-8ce2-f3199b871e98",
+      "relation": "has_result"
+    },
+    {
+      "src": "exploit.local.owasp_a05_security_misconfiguration",
+      "dst": "feec3a69-1830-49ca-8379-6406352be1df",
+      "relation": "has_result"
+    },
+    {
+      "src": "exploit.local.owasp_a06_vulnerable_components",
+      "dst": "94189e6c-4777-4ede-bebe-36fff3264d42",
+      "relation": "has_result"
+    },
+    {
+      "src": "exploit.local.owasp_a08_integrity_failures",
+      "dst": "2a799644-f1ed-4574-adcf-c0cd415f923a",
+      "relation": "has_result"
+    },
+    {
+      "src": "exploit.local.owasp_a10_ssrf",
+      "dst": "df4c193d-b5ef-4d7e-a86b-6147408a9c95",
+      "relation": "has_result"
+    },
+    {
+      "src": "exploit.local.pulse_secure",
+      "dst": "fad10219-75f6-4219-a20a-b56aa4a55014",
+      "relation": "has_result"
+    },
+    {
+      "src": "exploit.local.citrix_adc",
+      "dst": "fd1b34c8-eada-4d03-b0d6-415c335c7f1b",
+      "relation": "has_result"
+    },
+    {
+      "src": "exploit.local.cisco_asa",
+      "dst": "a4825aeb-7c8b-45bd-b52e-7fcf2b487cc8",
+      "relation": "has_result"
+    },
+    {
+      "src": "exploit.local.exchange_proxylogon",
+      "dst": "3fd719b9-372c-440e-b8c0-dbf7dc740a42",
+      "relation": "has_result"
+    },
+    {
+      "src": "exploit.local.apache_mod_proxy_ssrf",
+      "dst": "a3c8a5f4-2233-4127-aaa7-e9a6a74fb0c3",
+      "relation": "has_result"
+    },
+    {
+      "src": "exploit.local.f5_bigip",
+      "dst": "18a754bc-ead0-4645-b419-c9584e0a9251",
+      "relation": "has_result"
+    },
+    {
+      "src": "exploit.local.spring4shell",
+      "dst": "99ed73ea-6a22-4490-b973-2d954dbed37c",
+      "relation": "has_result"
+    },
+    {
+      "src": "exploit.local.moveit_transfer",
+      "dst": "b86715c1-94f4-49f3-94f5-a8179aa2c1e8",
+      "relation": "has_result"
+    },
+    {
+      "src": "exploit.local.activemq_rce",
+      "dst": "5d47b06c-cdb8-4250-8d8c-728874cadcbe",
+      "relation": "has_result"
+    },
+    {
+      "src": "exploit.local.panos_command_injection",
+      "dst": "1560903f-ea8a-4b5b-ae40-211fc3cb010a",
+      "relation": "has_result"
+    },
+    {
+      "src": "exploit.local.ivanti_connect_secure",
+      "dst": "2b66e944-19ce-4cd8-b5fb-767a9262dd73",
+      "relation": "has_result"
+    }
+  ]
+}
