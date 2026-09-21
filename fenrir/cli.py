@@ -40,6 +40,8 @@ app.add_typer(sessions_app, name="sessions", help="Manage exploitation sessions"
 
 DEFAULT_SCOPE = Path(__file__).parent / "config" / "scope.yaml"
 DEFAULT_NMAP_CONFIG = Path(__file__).parent.parent / "config" / "nmap.yaml"
+DEFAULT_EXPLOITS_CONFIG = Path(__file__).parent.parent / "config" / "exploits.yaml"
+DEFAULT_WORDLISTS_CONFIG = Path(__file__).parent.parent / "config" / "wordlists.yaml"
 
 
 @app.command()
@@ -82,6 +84,10 @@ def run(
 
     # 4. Session Manager (para explotación)
     session_manager = SessionManager() if (exploit or execute) else None
+    
+    # Debug: verificar session_manager
+    if session_manager:
+        console.print(f"[dim]Session Manager inicializado[/dim]")
 
     # 5. CVE Lookup Config
     cve_config = CVELookupConfig(
@@ -125,7 +131,9 @@ def run(
     # Guardar sesiones si hubo explotación
     if session_manager:
         session_path = Path(".fenrir/sessions.json")
+        console.print(f"[dim]Guardando {len(session_manager)} sesiones en {session_path}[/dim]")
         session_manager.save(session_path)
+        console.print(f"[green]✓ Sesiones guardadas[/green]")
 
     # 9. Reportes
     output.mkdir(parents=True, exist_ok=True)
@@ -150,14 +158,20 @@ def runs() -> None:
 
 @app.command()
 def config(
-    setting: str = typer.Argument(None, help="Configuración a editar (nmap)"),
+    setting: str = typer.Argument(None, help="Configuración a editar (nmap, exploits, wordlists)"),
 ) -> None:
     """Configura opciones del framework."""
     if setting == "nmap":
         _config_nmap()
+    elif setting == "exploits":
+        _config_exploits()
+    elif setting == "wordlists":
+        _config_wordlists()
     else:
         console.print("[yellow]Uso: fenrir config <setting>[/yellow]")
-        console.print("  nmap  - Configurar opciones de nmap")
+        console.print("  nmap       - Configurar opciones de nmap")
+        console.print("  exploits   - Configurar opciones de exploits")
+        console.print("  wordlists  - Configurar rutas de wordlists")
 
 
 def _config_nmap() -> None:
@@ -185,6 +199,7 @@ def _config_nmap() -> None:
         "timing": timing,
         "ping": "-Pn" in options_set,
         "xml": "-oX" in options_set and "-" in options_set,
+        "vuln_scripts": config.get("vuln_scripts", False),
         "ports": ports,
         "timeout": _valid_timeout(config.get("timeout", 600)),
         "extra": extra_options,
@@ -194,7 +209,7 @@ def _config_nmap() -> None:
         console.print("[yellow]La configuración interactiva necesita una terminal (TTY).[/yellow]")
         return
 
-    values = ["version", "timing", "ping", "xml", "ports", "timeout", "advanced", "save", "reset", "cancel"]
+    values = ["version", "timing", "ping", "xml", "vuln_scripts", "ports", "timeout", "advanced", "save", "reset", "cancel"]
     selected = 0
     while True:
         _render_nmap_menu(state, values, selected)
@@ -255,6 +270,7 @@ def _nmap_state_from_config(config: dict) -> dict:
         "timing": timing,
         "ping": "-Pn" in options,
         "xml": "-oX" in options and "-" in options,
+        "vuln_scripts": config.get("vuln_scripts", False),
         "ports": str(config.get("ports", "")),
         "timeout": _valid_timeout(config.get("timeout", 600)),
         "extra": [option for option in options if option not in known and not option.startswith("-T")],
@@ -262,7 +278,7 @@ def _nmap_state_from_config(config: dict) -> dict:
 
 
 def _change_nmap_value(state: dict, field: str, increase: bool) -> None:
-    if field in {"version", "ping", "xml"}:
+    if field in {"version", "ping", "xml", "vuln_scripts"}:
         state[field] = not state[field]
     elif field == "timing":
         index = _NMAP_TIMINGS.index(state["timing"])
@@ -282,7 +298,7 @@ def _save_nmap_config(path: Path, state: dict) -> None:
     if state["xml"]:
         options.extend(["-oX", "-"])
     options.extend(state["extra"])
-    config = {"default_options": options, "timeout": state["timeout"]}
+    config = {"default_options": options, "timeout": state["timeout"], "vuln_scripts": state["vuln_scripts"]}
     if state["ports"]:
         config["ports"] = state["ports"]
     with open(path, "w") as f:
@@ -300,6 +316,7 @@ def _render_nmap_menu(state: dict, values: list[str], selected: int) -> None:
         "timing": ("Velocidad del escaneo", state["timing"]),
         "ping": ("Asumir host activo (-Pn)", "Activado" if state["ping"] else "Desactivado"),
         "xml": ("Salida XML para Fenrir", "Activada" if state["xml"] else "Desactivada"),
+        "vuln_scripts": ("Scripts de vulnerabilidad", "Activada" if state["vuln_scripts"] else "Desactivada"),
         "ports": ("Puertos", state["ports"] or "Predeterminados"),
         "timeout": ("Timeout", f'{state["timeout"]} s'),
         "advanced": ("Opciones extra", " ".join(state["extra"]) or "Ninguna"),
@@ -348,6 +365,93 @@ def _read_key() -> str:
             key + sequence, ""
         )
     return {"\n": "enter", "\r": "enter", "q": "cancel"}.get(key, "")
+
+
+def _config_exploits() -> None:
+    """Configura opciones de exploits."""
+    config_path = DEFAULT_EXPLOITS_CONFIG
+    
+    default_config = {
+        "parallel_workers": 4,
+        "timeout": 300,
+        "retry_failed": False,
+        "auto_exploit": False,
+        "msfvenom": {
+            "default_platform": "linux_x64",
+            "default_format": "elf",
+            "default_lhost": "0.0.0.0",
+            "default_lport": "4444",
+        },
+        "hydra": {
+            "threads": 4,
+            "timeout": 300,
+        },
+    }
+    
+    if not config_path.exists():
+        config_path.parent.mkdir(parents=True, exist_ok=True)
+        with open(config_path, "w") as f:
+            yaml.safe_dump(default_config, f, default_flow_style=False, sort_keys=False)
+        console.print(f"[green]✓ Configuración de exploits creada: {config_path}[/green]")
+        return
+    
+    with open(config_path) as f:
+        config = yaml.safe_load(f) or default_config
+    
+    console.print(f"[cyan]Configuración actual de exploits:[/cyan]")
+    console.print(yaml.dump(config, default_flow_style=False, sort_keys=False))
+    
+    # Simple prompt-based editing
+    parallel_workers = Prompt.ask("Workers paralelos", default=str(config.get("parallel_workers", 4)))
+    timeout = Prompt.ask("Timeout (segundos)", default=str(config.get("timeout", 300)))
+    auto_exploit = Prompt.ask("Auto-explotar (true/false)", default=str(config.get("auto_exploit", False)))
+    
+    config["parallel_workers"] = int(parallel_workers)
+    config["timeout"] = int(timeout)
+    config["auto_exploit"] = auto_exploit.lower() == "true"
+    
+    with open(config_path, "w") as f:
+        yaml.safe_dump(config, f, default_flow_style=False, sort_keys=False)
+    
+    console.print(f"[green]✓ Configuración de exploits guardada.[/green]")
+
+
+def _config_wordlists() -> None:
+    """Configura rutas de wordlists."""
+    config_path = DEFAULT_WORDLISTS_CONFIG
+    
+    default_config = {
+        "rockyou": "/usr/share/wordlists/rockyou.txt",
+        "seclists": "/usr/share/seclists/Passwords/Common-Credentials/",
+        "custom": [],
+        "common_passwords": [
+            "password", "123456", "12345678", "qwerty", "abc123",
+            "admin", "welcome", "shadow", "master", "dragon",
+        ],
+    }
+    
+    if not config_path.exists():
+        config_path.parent.mkdir(parents=True, exist_ok=True)
+        with open(config_path, "w") as f:
+            yaml.safe_dump(default_config, f, default_flow_style=False, sort_keys=False)
+        console.print(f"[green]✓ Configuración de wordlists creada: {config_path}[/green]")
+        return
+    
+    with open(config_path) as f:
+        config = yaml.safe_load(f) or default_config
+    
+    console.print(f"[cyan]Configuración actual de wordlists:[/cyan]")
+    console.print(yaml.dump(config, default_flow_style=False, sort_keys=False))
+    
+    # Simple prompt-based editing
+    rockyou_path = Prompt.ask("Ruta de rockyou", default=config.get("rockyou", "/usr/share/wordlists/rockyou.txt"))
+    
+    config["rockyou"] = rockyou_path
+    
+    with open(config_path, "w") as f:
+        yaml.safe_dump(config, f, default_flow_style=False, sort_keys=False)
+    
+    console.print(f"[green]✓ Configuración de wordlists guardada.[/green]")
 
 
 if __name__ == "__main__":

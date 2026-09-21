@@ -1,6 +1,7 @@
 """CLI commands for session management."""
 from __future__ import annotations
 
+import subprocess
 from pathlib import Path
 from typing import Optional
 
@@ -84,10 +85,103 @@ def interact(
     console.print(f"[green]Opening session {session_id}...[/green]")
     console.print(f"[dim]Target: {session.target}:{session.port}[/dim]")
     console.print(f"[dim]Type: {session.session_type.value}[/dim]")
+    console.print(f"[dim]Transport: {session.transport}[/dim]")
     
-    # TODO: Implement actual shell interaction
-    console.print("[yellow]Shell interaction not yet implemented[/yellow]")
-    console.print("[dim]Use SSH directly: ssh {user}@{target} -p {port}[/dim]")
+    # Get credentials from metadata
+    credentials = session.metadata.get("credentials", "")
+    if credentials and ":" in credentials:
+        username, password = credentials.split(":", 1)
+    else:
+        username = session.user or "anonymous"
+        password = ""
+    
+    # Implement interaction based on transport type
+    if session.transport == "ftp":
+        _interact_ftp(session.target, session.port, username, password)
+    elif session.transport == "ssh":
+        _interact_ssh(session.target, session.port, username, password)
+    else:
+        console.print(f"[yellow]Transport {session.transport} not yet implemented[/yellow]")
+        console.print(f"[dim]Credentials: {username}:{password if password else 'N/A'}[/dim]")
+
+
+def _interact_ftp(target: str, port: int, username: str, password: str) -> None:
+    """Interact with FTP session using curl or python."""
+    console.print(f"[cyan]FTP Session: {username}@{target}:{port}[/cyan]")
+    
+    # Try using python ftplib
+    try:
+        import ftplib
+        ftp = ftplib.FTP()
+        ftp.connect(target, port)
+        ftp.login(username, password)
+        console.print(f"[green]✓ Connected to FTP[/green]")
+        console.print(f"[dim]Current directory: {ftp.pwd()}[/dim]")
+        
+        # Interactive shell
+        console.print("\n[cyan]FTP Commands: ls, cd <path>, get <file>, put <file>, quit[/cyan]")
+        while True:
+            try:
+                cmd = input(f"ftp {username}@{target}:{port}> ").strip()
+                if not cmd:
+                    continue
+                if cmd in ("quit", "exit", "q"):
+                    break
+                elif cmd == "ls":
+                    files = []
+                    ftp.retrlines('LIST', files.append)
+                    for line in files:
+                        console.print(line)
+                elif cmd.startswith("cd "):
+                    path = cmd[3:].strip()
+                    ftp.cwd(path)
+                    console.print(f"[dim]Current directory: {ftp.pwd()}[/dim]")
+                elif cmd.startswith("get "):
+                    filename = cmd[4:].strip()
+                    with open(filename, 'wb') as f:
+                        ftp.retrbinary(f'RETR {filename}', f.write)
+                    console.print(f"[green]✓ Downloaded {filename}[/green]")
+                elif cmd.startswith("put "):
+                    filename = cmd[4:].strip()
+                    with open(filename, 'rb') as f:
+                        ftp.storbinary(f'STOR {filename}', f)
+                    console.print(f"[green]✓ Uploaded {filename}[/green]")
+                else:
+                    console.print(f"[yellow]Unknown command: {cmd}[/yellow]")
+            except Exception as e:
+                console.print(f"[red]Error: {e}[/red]")
+        
+        ftp.quit()
+        console.print("[green]FTP session closed[/green]")
+        
+    except ImportError:
+        console.print("[yellow]ftplib not available, using curl[/yellow]")
+        # Fallback to curl commands
+        console.print(f"[dim]Use curl manually: curl -u {username}:{password} ftp://{target}:{port}/[/dim]")
+    except Exception as e:
+        console.print(f"[red]FTP connection failed: {e}[/red]")
+
+
+def _interact_ssh(target: str, port: int, username: str, password: str) -> None:
+    """Interact with SSH session using sshpass or manual."""
+    console.print(f"[cyan]SSH Session: {username}@{target}:{port}[/cyan]")
+    
+    if password:
+        # Try using sshpass
+        try:
+            subprocess.run(["sshpass", "-v"], capture_output=True, check=True)
+            console.print("[green]Using sshpass for automatic login[/green]")
+            cmd = ["sshpass", "-p", password, "ssh", "-o", "StrictHostKeyChecking=no", 
+                   f"{username}@{target}", "-p", str(port)]
+            subprocess.run(cmd)
+            return
+        except (FileNotFoundError, subprocess.CalledProcessError):
+            console.print("[yellow]sshpass not found[/yellow]")
+    
+    # Manual connection
+    console.print(f"[dim]Connect manually: ssh {username}@{target} -p {port}[/dim]")
+    if password:
+        console.print(f"[dim]Password: {password}[/dim]")
 
 
 @app.command()

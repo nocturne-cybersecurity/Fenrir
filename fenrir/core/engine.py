@@ -53,6 +53,7 @@ class Engine:
         # Pass session_manager to exploit executor modules
         if self.session_manager and hasattr(chosen, 'session_manager'):
             chosen.session_manager = self.session_manager
+            console.print(f"[dim]  Session manager passed to {chosen.name}[/dim]")
         
         # Pass policy to modules that support it
         if self.policy and hasattr(chosen, 'policy'):

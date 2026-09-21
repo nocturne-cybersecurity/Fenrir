@@ -1,0 +1,14 @@
+rockyou: /usr/share/wordlists/rockyou.txt
+seclists: /usr/share/seclists/Passwords/Common-Credentials/
+custom: []
+common_passwords:
+- password
+- '123456'
+- '12345678'
+- qwerty
+- abc123
+- admin
+- welcome
+- shadow
+- master
+- dragon

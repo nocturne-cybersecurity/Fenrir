@@ -27,7 +27,8 @@ class NmapScan(BaseModule):
     def _load_config(self) -> dict:
         config_path = Path(__file__).parent.parent.parent / "config" / "nmap.yaml"
         default_config = {
-            "default_options": ["-sV", "-sC", "--script=vuln", "-T4", "-Pn", "-oX", "-"],
+            "default_options": ["-sV", "-sC", "-T4", "-Pn", "-oX", "-"],
+            "vuln_scripts": False,
             "timeout": 600
         }
         if config_path.exists():
@@ -60,6 +61,11 @@ class NmapScan(BaseModule):
             options = self.config.get("default_options", ["-sV", "-T4", "-Pn", "-oX", "-"])
             timeout = self.config.get("timeout", 600)
             cmd = ["nmap"] + options
+            
+            # Add vuln scripts if enabled in config
+            if self.config.get("vuln_scripts", False):
+                cmd.append("--script=vuln")
+            
             ports = self.config.get("ports")
             if ports and "-p" not in options:
                 cmd.extend(["-p", str(ports)])
