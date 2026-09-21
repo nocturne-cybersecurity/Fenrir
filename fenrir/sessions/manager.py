@@ -1,8 +1,10 @@
 """Gestor central de sesiones activas."""
 from __future__ import annotations
 
+import json
 from collections.abc import Iterator
 from datetime import UTC, datetime
+from pathlib import Path
 from typing import Any
 
 from fenrir.models.session import Session, SessionStatus
@@ -95,3 +97,32 @@ class SessionManager:
 
     def __len__(self) -> int:
         return len(self._sessions)
+    
+    def save(self, path: Path) -> None:
+        """Guarda las sesiones a disco."""
+        path.parent.mkdir(parents=True, exist_ok=True)
+        data = {
+            "sessions": [s.to_dict() for s in self._sessions.values()],
+        }
+        with open(path, "w") as f:
+            json.dump(data, f, indent=2, default=str)
+    
+    @classmethod
+    def load(cls, path: Path) -> SessionManager:
+        """Carga las sesiones desde disco."""
+        manager = cls()
+        if not path.exists():
+            return manager
+        
+        with open(path) as f:
+            data = json.load(f)
+        
+        for session_data in data.get("sessions", []):
+            session = Session(**session_data)
+            manager._sessions[session.id] = session
+        
+        return manager
+    
+    def list_all(self) -> list[Session]:
+        """Lista todas las sesiones (incluyendo cerradas)."""
+        return list(self._sessions.values())

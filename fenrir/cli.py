@@ -19,8 +19,14 @@ from fenrir.core.registry import discover_modules
 from fenrir.core.scope import Scope, ScopeError
 from fenrir.core.state import Node, NodeType, StateGraph
 from fenrir.core.storage import Storage
+from fenrir.modules.exploit.parallel_executor import ParallelExploitExecutor
+from fenrir.modules.exploit.real_executor import RealExploitExecutor
+from fenrir.modules.validate.cve_lookup import CVELookupConfig, CVELookupModule
 from fenrir.reporting.generator import write_json, write_markdown
 from fenrir.sessions.manager import SessionManager
+
+# Import sessions CLI
+from fenrir.cli_sessions import app as sessions_app
 
 # Importar banner desde src
 sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
@@ -28,6 +34,9 @@ from banner import banner
 
 app = typer.Typer(help="fenrir — framework modular de auditoría ofensiva")
 console = Console()
+
+# Register sessions subcommand
+app.add_typer(sessions_app, name="sessions", help="Manage exploitation sessions")
 
 DEFAULT_SCOPE = Path(__file__).parent / "config" / "scope.yaml"
 DEFAULT_NMAP_CONFIG = Path(__file__).parent.parent / "config" / "nmap.yaml"
@@ -46,6 +55,9 @@ def run(
     execute: bool = typer.Option(False, "--execute", help="Ejecuta exploits reales (peligroso)"),
     post: bool = typer.Option(False, "--post", help="Habilita módulos post-explotación"),
     privesc: bool = typer.Option(False, "--privesc", help="Habilita descubrimiento de privesc"),
+    nvd_api_key: str = typer.Option(None, "--nvd-api-key", help="NVD API key para rate limits más altos"),
+    use_cve_api: bool = typer.Option(True, "--use-cve-api/--no-cve-api", help="Usar APIs externas para lookup de CVEs"),
+    no_confirm: bool = typer.Option(False, "--no-confirm", help="Ejecutar exploits sin confirmación interactiva"),
 ) -> None:
     """Ejecuta el pipeline completo contra un target."""
     # Mostrar banner
@@ -71,11 +83,32 @@ def run(
     # 4. Session Manager (para explotación)
     session_manager = SessionManager() if (exploit or execute) else None
 
-    # 5. Módulos
+    # 5. CVE Lookup Config
+    cve_config = CVELookupConfig(
+        use_nvd=use_cve_api,
+        use_trident=use_cve_api,
+        nvd_api_key=nvd_api_key,
+    )
+
+    # 6. Módulos
     modules = discover_modules()
+    
+    # Configurar CVELookupModule si está disponible
+    for module in modules:
+        if isinstance(module, CVELookupModule):
+            module.config = cve_config
+        # Configurar executors con no_confirm
+        if hasattr(module, 'require_confirmation'):
+            module.require_confirmation = not no_confirm
+        # Desactivar RealExploitExecutor si ParallelExploitExecutor está presente
+        if isinstance(module, ParallelExploitExecutor):
+            for m in modules:
+                if isinstance(m, RealExploitExecutor):
+                    m.priority = 0  # Desactivar poniendo prioridad muy baja
+    
     console.print(f"[dim]Módulos cargados: {[m.name for m in modules]}[/dim]")
 
-    # 6. Engine
+    # 7. Engine
     policy = ExecutionPolicy.from_flags(exploit=exploit, execute=execute, post=post, privesc=privesc)
     engine = Engine(
         state,
@@ -86,17 +119,22 @@ def run(
     )
     engine.run()
 
-    # 7. Persistencia
+    # 8. Persistencia
     storage.finish_run(run_id, state)
+    
+    # Guardar sesiones si hubo explotación
+    if session_manager:
+        session_path = Path(".fenrir/sessions.json")
+        session_manager.save(session_path)
 
-    # 8. Reportes
+    # 9. Reportes
     output.mkdir(parents=True, exist_ok=True)
     json_path = write_json(state, output / f"{target}.json")
     md_path = write_markdown(state, output / f"{target}.md", target, session_manager=session_manager)
     console.print(f"\n[green]✓ Reporte JSON:[/green] {json_path}")
     console.print(f"[green]✓ Reporte Markdown:[/green] {md_path}")
     
-    # 9. Mostrar sesiones si hubo explotación
+    # 10. Mostrar sesiones si hubo explotación
     if session_manager and len(session_manager) > 0:
         console.print(f"\n[green]✓ Sesiones activas: {len(session_manager)}[/green]")
         for session in session_manager.list_active():

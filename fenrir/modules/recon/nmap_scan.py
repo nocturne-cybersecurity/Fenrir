@@ -27,7 +27,7 @@ class NmapScan(BaseModule):
     def _load_config(self) -> dict:
         config_path = Path(__file__).parent.parent.parent / "config" / "nmap.yaml"
         default_config = {
-            "default_options": ["-sV", "-T4", "-Pn", "-oX", "-"],
+            "default_options": ["-sV", "-sC", "--script=vuln", "-T4", "-Pn", "-oX", "-"],
             "timeout": 600
         }
         if config_path.exists():
